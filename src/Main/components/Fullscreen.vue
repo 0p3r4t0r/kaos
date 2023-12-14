@@ -39,7 +39,7 @@ export default {
             if (this.isFullscreen) {
                 document.exitFullscreen();
             } else {
-                let app = this.$root.$children[0];
+                let app = this.$root;
                 app.$el.requestFullscreen();
             }
         },

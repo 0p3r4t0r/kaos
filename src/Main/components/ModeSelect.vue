@@ -53,7 +53,7 @@ export default {
 
         accept: function() {
             let mode = MODES[this.swiper.activeIndex];
-            let app = this.$root.$children[0];
+            let app = this.$root;
             app.startGame(mode);
         },
     },

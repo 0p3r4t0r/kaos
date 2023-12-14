@@ -15,8 +15,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+import * as VueRouter from 'vue-router'
 
 import Home from './routes/Home.vue';
 import About from './routes/About.vue';
@@ -28,8 +27,6 @@ import Settings from './routes/Settings.vue';
 // ROUTER
 // -----------------------------------------------------------------------------
 
-Vue.use(VueRouter);
-
 const routes = [
     { path: '/', component: Home },
     { path: '/about', component: About },
@@ -38,4 +35,7 @@ const routes = [
     { path: '/settings', component: Settings },
 ];
 
-export default new VueRouter({ routes });
+export default new VueRouter.createRouter({ 
+    history: VueRouter.createWebHashHistory(),
+    routes
+});

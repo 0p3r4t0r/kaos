@@ -15,10 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Vue from 'vue';
+import { createApp } from 'vue';
 
 import App from './App.vue';
 import locale from './locale';
+import routes from './Main/router';
 import 'input';
 import './style/root.scss';
 
@@ -26,8 +27,10 @@ import './style/root.scss';
 // APP
 // -----------------------------------------------------------------------------
 
-new Vue({
-    el: '#app',
-    render: h => h(App),
-    i18n: locale,
-});
+const app = createApp(App);
+
+app.use(locale)
+app.use(routes);
+app.mount('#app');
+
+export default app;

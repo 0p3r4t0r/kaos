@@ -28,7 +28,6 @@
 <script>
 import { IS_TOUCH_DEVICE } from 'globals';
 import * as engine from 'engine/core';
-import { ACTION_EVENTS } from 'input/events';
 import { setContext, CONTEXTS } from 'input/state';
 
 import MobileControls from './components/MobileControls.vue';
@@ -41,7 +40,7 @@ export default {
     
     methods: {
         quit: function() {
-            let app = this.$root.$children[0];
+            let app = this.$root;
             app.leaveGame();
         },
     },

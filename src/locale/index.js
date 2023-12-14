@@ -15,8 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Vue from 'vue';
-import VueI18n from 'vue-i18n';
+import { createI18n } from 'vue-i18n';
 
 import en from './en';
 import ja from './ja';
@@ -25,9 +24,8 @@ import ja from './ja';
 // LOCALIZATION
 // ----------------------------------------------------------------------------
 
-Vue.use(VueI18n);
-
-export default new VueI18n({
+export default createI18n({
     locale: 'ja',
+    fallbackLocale: 'en',
     messages: { en, ja, },
 });
