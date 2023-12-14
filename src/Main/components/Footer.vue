@@ -24,7 +24,7 @@
                 </router-link>
             </li>
             <li>
-                <a href='https://github.com/kaos-game/kaos'>
+                <a href='https://github.com/0p3r4t0r/kaos'>
                     github
                 </a>
             </li>

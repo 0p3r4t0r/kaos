@@ -36,11 +36,12 @@ module.exports = {
     entry: [ './src/app.js', './src/style/root.scss' ],
 
     devServer: {
-        contentBase: path.join(__dirname, 'devdist'),
+        allowedHosts: [ 'all' ],
+        static: {
+            directory: path.join(__dirname, 'devdist'),
+        },
         compress: true,
-        host: '0.0.0.0',
         port: 9000,
-        disableHostCheck: true,
     },
 
     output: {
