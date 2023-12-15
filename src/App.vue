@@ -1,37 +1,29 @@
-<!--
- Kaos
- Copyright (C) 2020 Brian Sutherland (bsuth)
-
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
--->
-
 <template>
-    <div id='app'>
-        <transition name='fade' mode='out-in'>
-            <component :is='component' />
-        </transition>
-    </div>
+  <div id="app">
+    <transition
+      name="fade"
+      mode="out-in"
+    >
+      <component :is="component" />
+    </transition>
+  </div>
 </template>
 
 
 <script>
 import * as engine from 'engine/core';
 
-import Main from './Main/Main.vue';
+import Kaos from './Main/Kaos.vue';
 import Game from './Game/Game.vue';
 
 export default {
-    components: { Main, Game },
+    components: { Kaos, Game },
+
+    data() {
+        return {
+            component: 'Kaos',
+        };
+    },
 
     methods: {
         startGame: function(mode) {
@@ -39,14 +31,8 @@ export default {
             this.component = 'Game';
         },
         leaveGame: function() {
-            this.component = 'Main';
+            this.component = 'Kaos';
         },
-    },
-
-    data() {
-        return {
-            component: 'Main',
-        };
     },
 };
 </script>

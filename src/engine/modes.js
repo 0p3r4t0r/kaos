@@ -1,21 +1,4 @@
-/*
- * Kaos
- * Copyright (C) 2020 Brian Sutherland (bsuth) Robert Sutherland (0p3r4t0r)
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-import { state, player } from './core';
+import { gameState, player } from './core';
 import * as orbGenerator from './orbGenerator';
 
 // -----------------------------------------------------------------------------
@@ -26,14 +9,14 @@ import * as orbGenerator from './orbGenerator';
  * Gain points by surviving for as long as possible.
  */
 export function timed() {
-    state.score = Math.floor((Date.now() - state.tStart) / 100);
+    gameState.score = Math.floor((Date.now() - gameState.tStart) / 100);
 
     for (let orb of orbGenerator.orbs) {
         if (orb.colorId == player.colorId)
             continue;
 
         if (player.checkCollision(orb)) {
-            state.gameover = true;
+            gameState.gameover = true;
             break;
         }
     }
@@ -48,14 +31,14 @@ export function timed() {
  */
 export function spin2win() {
     if (player.checkSpin())
-        ++state.score;
+        ++gameState.score;
 
     for (let orb of orbGenerator.orbs) {
         if (orb.colorId == player.colorId)
             continue;
 
         if (player.checkCollision(orb)) {
-            state.gameover = true;
+            gameState.gameover = true;
             break;
         }
     }
@@ -72,10 +55,10 @@ export function collector() {
     for (let orb of orbGenerator.orbs) {
         if (player.checkCollision(orb)) {
             if (orb.colorId == player.colorId) {
-                state.score++;
+                gameState.score++;
                 orbGenerator.initOrb(orb);
             } else {
-                state.gameover = true;
+                gameState.gameover = true;
             }
         }   
     }

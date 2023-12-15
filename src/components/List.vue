@@ -1,41 +1,51 @@
-<!--
- Kaos
- Copyright (C) 2020 Brian Sutherland (bsuth)
-
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
--->
-
 <template>
-    <ul class='kaos-list-ul'>
-        <li
-            v-for='(item, index) in items'
-            :key='index'
-            :class="{ 'active': index == activeIndex }"
-            @mouseover='setActiveIndex(index)'
-            @click='action'
-            class='kaos-list-li'
-        >
-            <a v-if='item.href' :href='item.href'>{{ $t(item.label) }}</a>
-            <span v-else class='label'>{{ $t(item.label) }}</span>
-        </li>
-    </ul>
+  <ul class="kaos-list-ul">
+    <li
+      v-for="(item, index) in items"
+      :key="index"
+      :class="{ 'active': index == activeIndex }"
+      class="kaos-list-li"
+      @mouseover="setActiveIndex(index)"
+      @click="action"
+    >
+      <a
+        v-if="item.href"
+        :href="item.href"
+      >{{ $t(item.label) }}</a>
+      <span
+        v-else
+        class="label"
+      >{{ $t(item.label) }}</span>
+    </li>
+  </ul>
 </template>
 
 <script>
 import { ACTION_EVENTS } from 'input/events';
 
 export default {
-    props: [ 'items', 'activeIndex' ],
+    props: {
+        items: {
+            type: Array,
+            required: true,
+        },
+        activeIndex: {
+            type: Number,
+            required: true,
+        },
+    },
+
+    mounted() {
+        window.addEventListener(ACTION_EVENTS.DOWN, this.next);
+        window.addEventListener(ACTION_EVENTS.UP, this.prev);
+        window.addEventListener(ACTION_EVENTS.ACCEPT, this.action);
+    },
+
+    beforeUnmount() {
+        window.removeEventListener(ACTION_EVENTS.DOWN, this.next);
+        window.removeEventListener(ACTION_EVENTS.UP, this.prev);
+        window.removeEventListener(ACTION_EVENTS.ACCEPT, this.action);
+    },
 
     methods: {
         // ---------------------------------------------------------------------
@@ -67,19 +77,7 @@ export default {
             (action) && (action)();
         },
     },
-
-    mounted() {
-        window.addEventListener(ACTION_EVENTS.DOWN, this.next);
-        window.addEventListener(ACTION_EVENTS.UP, this.prev);
-        window.addEventListener(ACTION_EVENTS.ACCEPT, this.action);
-    },
-
-    beforeDestroy() {
-        window.removeEventListener(ACTION_EVENTS.DOWN, this.next);
-        window.removeEventListener(ACTION_EVENTS.UP, this.prev);
-        window.removeEventListener(ACTION_EVENTS.ACCEPT, this.action);
-    },
-}
+};
 </script>
 
 <style lang='scss'>

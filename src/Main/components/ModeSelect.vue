@@ -1,43 +1,33 @@
-<!--
- Kaos
- Copyright (C) 2020 Brian Sutherland (bsuth)
-
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
--->
-
 <template>
-    <!-- swiper wrapper -->
-    <div class='swiper-container'>
-        <!-- slide wrapper -->
-        <div class='swiper-wrapper'>
-            <!-- slides -->
-            <div v-for='(slide, index) in slides' :key='index' class='swiper-slide'>
-                <object :data='slide.icon' type='image/svg+xml' />
-                <div class='divider' />
-                <h3>{{ $t(slide.label) }}</h3>
-                <p>{{ $t(slide.description) }}</p>
-            </div>
-        </div>
-
-        <!-- pagination -->
-        <div class='swiper-pagination'></div>
+  <!-- swiper wrapper -->
+  <div class="swiper-container">
+    <!-- slide wrapper -->
+    <div class="swiper-wrapper">
+      <!-- slides -->
+      <div
+        v-for="(slide, index) in slides"
+        :key="index"
+        class="swiper-slide"
+      >
+        <object
+          :data="slide.icon"
+          type="image/svg+xml"
+        />
+        <div class="divider" />
+        <h3>{{ $t(slide.label) }}</h3>
+        <p>{{ $t(slide.description) }}</p>
+      </div>
     </div>
+
+    <!-- pagination -->
+    <div class="swiper-pagination" />
+  </div>
 </template>
 
 
 <script>
-import Swiper from 'swiper';
-import 'swiper/css/swiper.min.css';
+import Swiper from 'swiper/bundle';
+import 'swiper/css/bundle';
 
 import { MODES } from 'globals';
 import { ACTION_EVENTS } from 'input/events';
@@ -47,16 +37,6 @@ const INVALID_SWIPER_ACCEPT_CLASSES = [
 ];
 
 export default {
-    methods: {
-        next: function() { this.swiper.slideNext(); },
-        prev: function() { this.swiper.slidePrev(); },
-
-        accept: function() {
-            let mode = MODES[this.swiper.activeIndex];
-            let app = this.$root.$children[0];
-            app.startGame(mode);
-        },
-    },
 
     data() {
         return {
@@ -82,6 +62,7 @@ export default {
 
     mounted() {
         this.swiper = new Swiper('.swiper-container', {
+            // modules: [ Navigation, Pagination ],
             effect: 'coverflow',
             slidesPerView: 'auto',
             centeredSlides: true,
@@ -110,10 +91,20 @@ export default {
         window.addEventListener(ACTION_EVENTS.ACCEPT, this.accept);
     },
 
-    beforeDestroy() {
+    beforeUnmount() {
         window.removeEventListener(ACTION_EVENTS.RIGHT, this.next);
         window.removeEventListener(ACTION_EVENTS.LEFT, this.prev);
         window.removeEventListener(ACTION_EVENTS.ACCEPT, this.accept);
+    },
+    methods: {
+        next: function() { this.swiper.slideNext(); },
+        prev: function() { this.swiper.slidePrev(); },
+
+        accept: function() {
+            let mode = MODES[this.swiper.activeIndex];
+            let app = this.$root;
+            app.startGame(mode);
+        },
     },
 };
 </script>

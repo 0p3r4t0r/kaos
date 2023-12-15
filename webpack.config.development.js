@@ -1,26 +1,10 @@
-/*
- * Kaos
- * Copyright (C) 2020 Brian Sutherland (bsuth)
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 const path = require('path');
 
+const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 
 // -----------------------------------------------------------------------------
 // DEPLOYMENT BUILD
@@ -36,11 +20,12 @@ module.exports = {
     entry: [ './src/app.js', './src/style/root.scss' ],
 
     devServer: {
-        contentBase: path.join(__dirname, 'devdist'),
+        allowedHosts: [ 'all' ],
+        static: {
+            directory: path.join(__dirname, 'devdist'),
+        },
         compress: true,
-        host: '0.0.0.0',
         port: 9000,
-        disableHostCheck: true,
     },
 
     output: {
@@ -64,6 +49,9 @@ module.exports = {
             {
                 test: /\.vue$/,
                 loader: 'vue-loader',
+                options: {
+                    reactivityTransform: true,
+                }
             },
             {
                 test: /\.(s?)css$/,
@@ -83,9 +71,15 @@ module.exports = {
             filename: 'index.html',
             template: 'src/index.html'
         }),
-        new CopyWebpackPlugin([
-            { from: 'assets' }
-        ]),
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: 'assets' }
+            ]
+        }),
         new VueLoaderPlugin(),
+        new webpack.DefinePlugin({
+            __VUE_OPTIONS_API__: true,
+            __VUE_PROD_DEVTOOLS__: false,
+        })
     ],
 };

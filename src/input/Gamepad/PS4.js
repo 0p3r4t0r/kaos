@@ -1,26 +1,14 @@
-/*
- * Kaos
- * Copyright (C) 2020 Brian Sutherland (bsuth)
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-import is from 'is_js';
 import {
     DURATION_EVENTS,
     ACTION_EVENTS,
 } from '../events';
 import { CONTEXTS } from 'input/state';
+
+// -----------------------------------------------------------------------------
+// Helpers
+// -----------------------------------------------------------------------------
+// https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent#browser_name_and_version
+const isFirefox = () => navigator.userAgent.includes('Firefox') && !navigator.userAgent.includes('Seamonkey');
 
 // -----------------------------------------------------------------------------
 // STATE / CONSTANTS
@@ -81,7 +69,7 @@ const buttonsFirefox = {
     },
 };
 
-export const BUTTONS = (is.firefox()) ? buttonsFirefox : buttonsChrome;
+export const BUTTONS = isFirefox() ? buttonsFirefox : buttonsChrome;
 
 
 // -----------------------------------------------------------------------------
@@ -106,7 +94,7 @@ const triggersFirefox = {
     },
 };
 
-export const TRIGGERS = (is.firefox()) ? triggersFirefox : triggersChrome;
+export const TRIGGERS = isFirefox() ? triggersFirefox : triggersChrome;
 
 
 // -----------------------------------------------------------------------------
@@ -207,4 +195,4 @@ const axesFirefox = {
     },
 };
 
-export const AXES = (is.firefox()) ? axesFirefox : axesChrome;
+export const AXES = isFirefox() ? axesFirefox : axesChrome;

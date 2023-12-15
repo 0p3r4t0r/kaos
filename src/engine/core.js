@@ -1,22 +1,6 @@
-/*
- * Kaos
- * Copyright (C) 2020 Brian Sutherland (bsuth) Robert Sutherland (0p3r4t0r)
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 import { COLORS, NIPPLE_RADIUS, IS_TOUCH_DEVICE, HUD_HEIGHT } from 'globals';
 import { DURATION_EVENTS, ACTION_EVENTS } from 'input/events';
+import { reactive } from 'vue';
 
 import * as modes from './modes';
 import * as orbGenerator from './orbGenerator';
@@ -26,16 +10,16 @@ import Player from './player';
 // GAME STATE
 // -----------------------------------------------------------------------------
 
-export const state = {
+export const gameState = reactive({
     tStart: null,
     mode: '',
-    modeUpdate: () => {},
+    modeUpdate: () => { },
     gameover: false,
     paused: false,
     score: 0,
-};
+});
 
-export let player = new Player();
+export let player = reactive(new Player());
 
 export let canvas = null;
 let _ctx = null;
@@ -106,7 +90,7 @@ function _update() {
     orbGenerator.update();
 
     // Run mode-dependent update
-    (state.modeUpdate)();
+    (gameState.modeUpdate)();
 }
 
 /*
@@ -116,9 +100,9 @@ export function gameloop() {
     _draw();
     _update();
 
-    if (state.gameover)
+    if (gameState.gameover)
         return;
-    if (state.paused)
+    if (gameState.paused)
         return;
 
     requestAnimationFrame(gameloop);
@@ -148,19 +132,19 @@ export function initCanvas() {
 export function setMode(mode) {
     switch (mode) {
     case 'timed':
-        state.modeUpdate = modes.timed;
+        gameState.modeUpdate = modes.timed;
         break;
     case 'spin':
-        state.modeUpdate = modes.spin2win;
+        gameState.modeUpdate = modes.spin2win;
         break;
     case 'collector':
-        state.modeUpdate = modes.collector;
+        gameState.modeUpdate = modes.collector;
         break;
     default:
         throw 'setMode: Invalid game mode';
     }
 
-    state.mode = mode;
+    gameState.mode = mode;
 }
 
 // -----------------------------------------------------------------------------
@@ -171,7 +155,7 @@ export function setMode(mode) {
  * This is run when the game context is entered. It handles attaching all of the
  * event listeners that need to be active when the code is running.
  */
-export function enter() { 
+export function enter() {
     for (let [event, listener] of Object.entries(ACTION_EVENT_LISTENERS))
         window.addEventListener(event, listener);
 
@@ -207,9 +191,9 @@ export function leave() {
  * Reset the game state.
  */
 export function reset() {
-    state.paused = false;
-    state.gameover = false;
-    state.score = 0;
+    gameState.paused = false;
+    gameState.gameover = false;
+    gameState.score = 0;
 
     // Reset game component states
     orbGenerator.reset();
@@ -224,32 +208,32 @@ export function reset() {
 // -----------------------------------------------------------------------------
 
 /*
- * Start the game.
+ * Start the gameState.
  */
 export function start() {
-    state.tStart = Date.now();
+    gameState.tStart = Date.now();
     gameloop();
 }
 
 /*
- * Pause the game.
+ * Pause the gameState.
  */
 export function pause() {
-    state.paused = true;
+    gameState.paused = true;
 }
 
 /*
- * Resume the game.
+ * Resume the gameState.
  */
 export function resume() {
-    if (state.paused) {
-        state.paused = false;
+    if (gameState.paused) {
+        gameState.paused = false;
         gameloop();
     }
 }
 
 /*
- * Restart the game.
+ * Restart the gameState.
  */
 export function restart() {
     reset();
@@ -314,7 +298,7 @@ function _playerVelStart(dim, dir) {
  */
 function _playerVelEnd(dim) {
     let dimOpp = (dim == 'vx') ? 'vy' : 'vx';
-    
+
     if (player[dimOpp] != 0)
         player[dimOpp] = Math.sign(player[dimOpp]);
     player[dim] = 0;

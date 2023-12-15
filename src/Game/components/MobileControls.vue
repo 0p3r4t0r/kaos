@@ -1,28 +1,19 @@
-<!--
- Kaos
- Copyright (C) 2020 Brian Sutherland (bsuth)
-
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
--->
-
 <template>
-    <div id='mobile-controls'>
-        <div id='move-nipple' />
-        <div id='color-nipple' />
+  <div id="mobile-controls">
+    <div id="move-nipple" />
+    <div id="color-nipple" />
 
-        <Sprite sprite='rotate' id='mobile-controls-rotate' class='rotate' />
-        <Sprite sprite='rotate-cc' id='mobile-controls-rotate-cc' class='rotate' />
-    </div>
+    <Sprite
+      id="mobile-controls-rotate"
+      sprite="rotate"
+      class="rotate"
+    />
+    <Sprite
+      id="mobile-controls-rotate-cc"
+      sprite="rotate-cc"
+      class="rotate"
+    />
+  </div>
 </template>
 
 <script>
@@ -45,49 +36,6 @@ export default {
             moveNipple: null,
             colorNipple: null,
         };
-    },
-    
-    methods: {
-        menuMove: function(data) {
-            (data.vector.x < -0.5) ?
-                register(ACTION_EVENTS.LEFT, 'nipple-left') :
-                unregister(ACTION_EVENTS.LEFT, 'nipple-left');
-            (data.vector.x > 0.5) ?
-                register(ACTION_EVENTS.RIGHT, 'nipple-right') :
-                unregister(ACTION_EVENTS.RIGHT, 'nipple-right');
-            (data.vector.y < -0.5) ?
-                register(ACTION_EVENTS.DOWN, 'nipple-down') :
-                unregister(ACTION_EVENTS.DOWN, 'nipple-down');
-            (data.vector.y > 0.5) ?
-                register(ACTION_EVENTS.UP, 'nipple-up') :
-                unregister(ACTION_EVENTS.UP, 'nipple-up');
-        },
-        menuEnd: function() {
-            unregister(ACTION_EVENTS.LEFT, 'nipple-left');
-            unregister(ACTION_EVENTS.RIGHT, 'nipple-right');
-            unregister(ACTION_EVENTS.DOWN, 'nipple-down');
-            unregister(ACTION_EVENTS.UP, 'nipple-up');
-        },
-        gameMove: function(data) {
-            (data.vector.x < -0.5) ?
-                register(DURATION_EVENTS.LEFT, 'nipple-left') :
-                unregister(DURATION_EVENTS.LEFT, 'nipple-left');
-            (data.vector.x > 0.5) ?
-                register(DURATION_EVENTS.RIGHT, 'nipple-right') :
-                unregister(DURATION_EVENTS.RIGHT, 'nipple-right');
-            (data.vector.y < -0.5) ?
-                register(DURATION_EVENTS.DOWN, 'nipple-down') :
-                unregister(DURATION_EVENTS.DOWN, 'nipple-down');
-            (data.vector.y > 0.5) ?
-                register(DURATION_EVENTS.UP, 'nipple-up') :
-                unregister(DURATION_EVENTS.UP, 'nipple-up');
-        },
-        gameEnd: function() {
-            unregister(DURATION_EVENTS.LEFT, 'nipple-left');
-            unregister(DURATION_EVENTS.RIGHT, 'nipple-right');
-            unregister(DURATION_EVENTS.DOWN, 'nipple-down');
-            unregister(DURATION_EVENTS.UP, 'nipple-up');
-        },
     },
 
     mounted() {
@@ -152,6 +100,49 @@ export default {
                 unregister(ACTION_EVENTS.BACK, 'mobile-controls-back') :
                 unregister(DURATION_EVENTS.ROTATE_CC, 'mobile-controls-rotate-cc');
         });
+    },
+
+    methods: {
+        menuMove: function (data) {
+            (data.vector.x < -0.5) ?
+                register(ACTION_EVENTS.LEFT, 'nipple-left') :
+                unregister(ACTION_EVENTS.LEFT, 'nipple-left');
+            (data.vector.x > 0.5) ?
+                register(ACTION_EVENTS.RIGHT, 'nipple-right') :
+                unregister(ACTION_EVENTS.RIGHT, 'nipple-right');
+            (data.vector.y < -0.5) ?
+                register(ACTION_EVENTS.DOWN, 'nipple-down') :
+                unregister(ACTION_EVENTS.DOWN, 'nipple-down');
+            (data.vector.y > 0.5) ?
+                register(ACTION_EVENTS.UP, 'nipple-up') :
+                unregister(ACTION_EVENTS.UP, 'nipple-up');
+        },
+        menuEnd: function () {
+            unregister(ACTION_EVENTS.LEFT, 'nipple-left');
+            unregister(ACTION_EVENTS.RIGHT, 'nipple-right');
+            unregister(ACTION_EVENTS.DOWN, 'nipple-down');
+            unregister(ACTION_EVENTS.UP, 'nipple-up');
+        },
+        gameMove: function (data) {
+            (data.vector.x < -0.5) ?
+                register(DURATION_EVENTS.LEFT, 'nipple-left') :
+                unregister(DURATION_EVENTS.LEFT, 'nipple-left');
+            (data.vector.x > 0.5) ?
+                register(DURATION_EVENTS.RIGHT, 'nipple-right') :
+                unregister(DURATION_EVENTS.RIGHT, 'nipple-right');
+            (data.vector.y < -0.5) ?
+                register(DURATION_EVENTS.DOWN, 'nipple-down') :
+                unregister(DURATION_EVENTS.DOWN, 'nipple-down');
+            (data.vector.y > 0.5) ?
+                register(DURATION_EVENTS.UP, 'nipple-up') :
+                unregister(DURATION_EVENTS.UP, 'nipple-up');
+        },
+        gameEnd: function () {
+            unregister(DURATION_EVENTS.LEFT, 'nipple-left');
+            unregister(DURATION_EVENTS.RIGHT, 'nipple-right');
+            unregister(DURATION_EVENTS.DOWN, 'nipple-down');
+            unregister(DURATION_EVENTS.UP, 'nipple-up');
+        },
     },
 };
 </script>

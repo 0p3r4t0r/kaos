@@ -1,48 +1,20 @@
-<!--
- Kaos
- Copyright (C) 2020 Brian Sutherland (bsuth)
-
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
--->
-
 <template>
-    <Dialog :items='items'>
-        <span>
-            {{ $t('gameover.gameover') }}<br />
-            {{ $t('gameover.score') }}{{ score }}
-        </span>
-    </Dialog>
+  <KaosDialog :items="items">
+    <span>
+      {{ $t('gameover.gameover') }}<br>
+      {{ $t('gameover.score') }}{{ score }}
+    </span>
+  </KaosDialog>
 </template>
 
 
 <script>
 import { NUM_SCORES, SCORES } from 'globals';
 import * as engine from 'engine/core';
-import Dialog from 'components/Dialog.vue';
+import KaosDialog from 'components/KaosDialog.vue';
 
 export default {
-    components: { Dialog },
-
-    methods: {
-        // HELPER FUNCTIONS
-        getDate: function() {
-            let dateObj = new Date();
-            let date = dateObj.getDate(); 
-            let month = dateObj.getMonth(); 
-            let year = dateObj.getFullYear(); 
-            return `${date}/${month}/${year}`;
-        },
-    },
+    components: { KaosDialog },
 
     data() {
         return {
@@ -55,9 +27,9 @@ export default {
     },
 
     mounted() {
-        this.score = engine.state.score;
+        this.score = engine.gameState.score;
         let saved = false;
-        let categoryScores = SCORES[engine.state.mode];
+        let categoryScores = SCORES[engine.gameState.mode];
         let gameScore = {
             score: this.score,
             date: this.getDate(),
@@ -77,6 +49,17 @@ export default {
             categoryScores.push(gameScore);
 
         localStorage.setItem('score_data', JSON.stringify(SCORES));
+    },
+
+    methods: {
+        // HELPER FUNCTIONS
+        getDate: function() {
+            let dateObj = new Date();
+            let date = dateObj.getDate(); 
+            let month = dateObj.getMonth(); 
+            let year = dateObj.getFullYear(); 
+            return `${date}/${month}/${year}`;
+        },
     },
 };
 </script>
