@@ -1,19 +1,19 @@
 <template>
   <div id="hud">
     <!-- {{ $t('hud.nextcolor') }}<div class='player-color' v-bind:class='nextColorClass' /> -->
-    {{ $t('hud.score') }}<span class="score">{{ state.score }}</span>
+    {{ $t('hud.score') }}<span class="score">{{ gameState.score }}</span>
   </div>
 </template>
 
 
 <script>
-import { state, player } from 'engine/core';
+import { gameState, player } from 'engine/core';
 
 export default {
 
     data() {
         return {
-            state: state,
+            gameState: gameState,
             player: player,
         };
     },

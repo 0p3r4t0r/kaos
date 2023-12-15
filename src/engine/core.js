@@ -1,5 +1,6 @@
 import { COLORS, NIPPLE_RADIUS, IS_TOUCH_DEVICE, HUD_HEIGHT } from 'globals';
 import { DURATION_EVENTS, ACTION_EVENTS } from 'input/events';
+import { reactive } from 'vue';
 
 import * as modes from './modes';
 import * as orbGenerator from './orbGenerator';
@@ -9,16 +10,16 @@ import Player from './player';
 // GAME STATE
 // -----------------------------------------------------------------------------
 
-export const state = {
+export const gameState = reactive({
     tStart: null,
     mode: '',
     modeUpdate: () => { },
     gameover: false,
     paused: false,
     score: 0,
-};
+});
 
-export let player = new Player();
+export let player = reactive(new Player());
 
 export let canvas = null;
 let _ctx = null;
@@ -89,7 +90,7 @@ function _update() {
     orbGenerator.update();
 
     // Run mode-dependent update
-    (state.modeUpdate)();
+    (gameState.modeUpdate)();
 }
 
 /*
@@ -99,9 +100,9 @@ export function gameloop() {
     _draw();
     _update();
 
-    if (state.gameover)
+    if (gameState.gameover)
         return;
-    if (state.paused)
+    if (gameState.paused)
         return;
 
     requestAnimationFrame(gameloop);
@@ -131,19 +132,19 @@ export function initCanvas() {
 export function setMode(mode) {
     switch (mode) {
     case 'timed':
-        state.modeUpdate = modes.timed;
+        gameState.modeUpdate = modes.timed;
         break;
     case 'spin':
-        state.modeUpdate = modes.spin2win;
+        gameState.modeUpdate = modes.spin2win;
         break;
     case 'collector':
-        state.modeUpdate = modes.collector;
+        gameState.modeUpdate = modes.collector;
         break;
     default:
         throw 'setMode: Invalid game mode';
     }
 
-    state.mode = mode;
+    gameState.mode = mode;
 }
 
 // -----------------------------------------------------------------------------
@@ -190,9 +191,9 @@ export function leave() {
  * Reset the game state.
  */
 export function reset() {
-    state.paused = false;
-    state.gameover = false;
-    state.score = 0;
+    gameState.paused = false;
+    gameState.gameover = false;
+    gameState.score = 0;
 
     // Reset game component states
     orbGenerator.reset();
@@ -207,32 +208,32 @@ export function reset() {
 // -----------------------------------------------------------------------------
 
 /*
- * Start the game.
+ * Start the gameState.
  */
 export function start() {
-    state.tStart = Date.now();
+    gameState.tStart = Date.now();
     gameloop();
 }
 
 /*
- * Pause the game.
+ * Pause the gameState.
  */
 export function pause() {
-    state.paused = true;
+    gameState.paused = true;
 }
 
 /*
- * Resume the game.
+ * Resume the gameState.
  */
 export function resume() {
-    if (state.paused) {
-        state.paused = false;
+    if (gameState.paused) {
+        gameState.paused = false;
         gameloop();
     }
 }
 
 /*
- * Restart the game.
+ * Restart the gameState.
  */
 export function restart() {
     reset();

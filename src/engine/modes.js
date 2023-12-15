@@ -1,4 +1,4 @@
-import { state, player } from './core';
+import { gameState, player } from './core';
 import * as orbGenerator from './orbGenerator';
 
 // -----------------------------------------------------------------------------
@@ -9,14 +9,14 @@ import * as orbGenerator from './orbGenerator';
  * Gain points by surviving for as long as possible.
  */
 export function timed() {
-    state.score = Math.floor((Date.now() - state.tStart) / 100);
+    gameState.score = Math.floor((Date.now() - gameState.tStart) / 100);
 
     for (let orb of orbGenerator.orbs) {
         if (orb.colorId == player.colorId)
             continue;
 
         if (player.checkCollision(orb)) {
-            state.gameover = true;
+            gameState.gameover = true;
             break;
         }
     }
@@ -31,14 +31,14 @@ export function timed() {
  */
 export function spin2win() {
     if (player.checkSpin())
-        ++state.score;
+        ++gameState.score;
 
     for (let orb of orbGenerator.orbs) {
         if (orb.colorId == player.colorId)
             continue;
 
         if (player.checkCollision(orb)) {
-            state.gameover = true;
+            gameState.gameover = true;
             break;
         }
     }
@@ -55,10 +55,10 @@ export function collector() {
     for (let orb of orbGenerator.orbs) {
         if (player.checkCollision(orb)) {
             if (orb.colorId == player.colorId) {
-                state.score++;
+                gameState.score++;
                 orbGenerator.initOrb(orb);
             } else {
-                state.gameover = true;
+                gameState.gameover = true;
             }
         }   
     }

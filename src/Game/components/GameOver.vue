@@ -27,9 +27,9 @@ export default {
     },
 
     mounted() {
-        this.score = engine.state.score;
+        this.score = engine.gameState.score;
         let saved = false;
-        let categoryScores = SCORES[engine.state.mode];
+        let categoryScores = SCORES[engine.gameState.mode];
         let gameScore = {
             score: this.score,
             date: this.getDate(),

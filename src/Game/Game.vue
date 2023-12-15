@@ -25,16 +25,16 @@ export default {
         return {
             enableMobileControls: IS_TOUCH_DEVICE,
             dialog: null,
-            gamestate: engine.state,
+            gameState: engine.gameState,
         };
     },
 
     computed: {
         gameover: function() {
-            return this.gamestate.gameover;
+            return this.gameState.gameover;
         },
         paused: function() {
-            return this.gamestate.paused;
+            return this.gameState.paused;
         },
     },
 
