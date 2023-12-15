@@ -1,0 +1,25 @@
+{
+    "name": "Kaos",
+    "icons": [
+        {
+            "src": "logo/LogoColor.svg",
+            "type": "image/svg+xml",
+            "sizes": "any"
+        },
+        {
+            "src": "icon/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icon/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "theme_color": "black",
+    "background_color": "black",
+    "start_url": "/",
+    "display": "standalone"
+}
