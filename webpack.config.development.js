@@ -68,9 +68,11 @@ module.exports = {
             filename: 'index.html',
             template: 'src/index.html'
         }),
-        new CopyWebpackPlugin([
-            { from: 'assets' }
-        ]),
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: 'assets' }
+            ]
+        }),
         new VueLoaderPlugin(),
         new webpack.DefinePlugin({
             __VUE_OPTIONS_API__: true,

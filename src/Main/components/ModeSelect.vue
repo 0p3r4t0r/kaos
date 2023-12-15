@@ -27,7 +27,7 @@
 
 <script>
 import Swiper from 'swiper';
-import 'swiper/css/swiper.min.css';
+import 'swiper/css';
 
 import { MODES } from 'globals';
 import { ACTION_EVENTS } from 'input/events';

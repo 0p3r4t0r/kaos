@@ -1,9 +1,14 @@
-import is from 'is_js';
 import {
     DURATION_EVENTS,
     ACTION_EVENTS,
 } from '../events';
 import { CONTEXTS } from 'input/state';
+
+// -----------------------------------------------------------------------------
+// Helpers
+// -----------------------------------------------------------------------------
+// https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent#browser_name_and_version
+const isFirefox = () => navigator.userAgent.includes('Firefox') && !navigator.userAgent.includes('Seamonkey');
 
 // -----------------------------------------------------------------------------
 // STATE / CONSTANTS
@@ -64,7 +69,7 @@ const buttonsFirefox = {
     },
 };
 
-export const BUTTONS = (is.firefox()) ? buttonsFirefox : buttonsChrome;
+export const BUTTONS = isFirefox() ? buttonsFirefox : buttonsChrome;
 
 
 // -----------------------------------------------------------------------------
@@ -89,7 +94,7 @@ const triggersFirefox = {
     },
 };
 
-export const TRIGGERS = (is.firefox()) ? triggersFirefox : triggersChrome;
+export const TRIGGERS = isFirefox() ? triggersFirefox : triggersChrome;
 
 
 // -----------------------------------------------------------------------------
@@ -190,4 +195,4 @@ const axesFirefox = {
     },
 };
 
-export const AXES = (is.firefox()) ? axesFirefox : axesChrome;
+export const AXES = isFirefox() ? axesFirefox : axesChrome;
