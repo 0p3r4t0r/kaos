@@ -1,0 +1,14 @@
+{
+    "name": "Kaos",
+    "icons": [
+        {
+            "src": "logo/LogoColor.svg",
+            "type": "image/svg+xml",
+            "sizes": "any"
+        }
+    ],
+    "theme_color": "black",
+    "background_color": "black",
+    "start_url": "/",
+    "display": "standalone"
+}
