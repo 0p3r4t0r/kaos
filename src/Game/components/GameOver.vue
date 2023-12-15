@@ -1,20 +1,20 @@
 <template>
-  <Dialog :items="items">
+  <KaosDialog :items="items">
     <span>
       {{ $t('gameover.gameover') }}<br>
       {{ $t('gameover.score') }}{{ score }}
     </span>
-  </Dialog>
+  </KaosDialog>
 </template>
 
 
 <script>
 import { NUM_SCORES, SCORES } from 'globals';
 import * as engine from 'engine/core';
-import Dialog from 'components/Dialog.vue';
+import KaosDialog from 'components/KaosDialog.vue';
 
 export default {
-    components: { Dialog },
+    components: { KaosDialog },
 
     data() {
         return {

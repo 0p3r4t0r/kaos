@@ -1,14 +1,14 @@
 <template>
-  <Dialog :items="items" />
+  <KaosDialog :items="items" />
 </template>
 
 
 <script>
-import Dialog from 'components/Dialog.vue';
+import KaosDialog from 'components/KaosDialog.vue';
 import * as engine from 'engine/core';
 
 export default {
-    components: { Dialog },
+    components: { KaosDialog },
 
     data() {
         return {
