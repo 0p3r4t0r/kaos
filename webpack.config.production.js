@@ -1,10 +1,11 @@
 const path = require('path');
 
+const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 
 // -----------------------------------------------------------------------------
 // PRODUCTION BUILD
@@ -70,13 +71,19 @@ module.exports = {
             filename: 'index.html',
             template: 'src/index.html'
         }),
-        new CopyWebpackPlugin([
-            { from: 'assets' }
-        ]),
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: 'assets' }
+            ]
+        }),
         // exclude VueLoaderPlugin() when using MiniCssExtractPlugin()
         new MiniCssExtractPlugin({
             filename: 'style.css'
         }),
         new VueLoaderPlugin(),
+        new webpack.DefinePlugin({
+            __VUE_OPTIONS_API__: true,
+            __VUE_PROD_DEVTOOLS__: false,
+        })
     ],
 };
