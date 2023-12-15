@@ -15,11 +15,13 @@
   "license": "GPL-3.0",
   "homepage": "https://github.com/0p3r4t0r/kaos",
   "scripts": {
-    "build": "webpack --config webpack.config.production.js",
-    "prod": "npx http-server -o dist",
-    "build:dev": "webpack --config webpack.config.development.js",
     "dev": "webpack-dev-server --config webpack.config.development.js",
-    "start": "npm run build; npm run prod",
+    "build": "webpack --config webpack.config.production.js",
+    "build:dev": "webpack --config webpack.config.development.js",
+    "serve": "npx http-server -o dist",
+    "serve:dev": "npx http-server -o devdist",
+    "start": "npm run build; npm run serve",
+    "start:dev": "npm run build:dev; npm run serve:dev",
     "deploy": "npm run build; git subtree push --prefix dist origin gh-pages"
   },
   "repository": {
