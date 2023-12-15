@@ -42,7 +42,6 @@ export default {
 
     mounted() {
         let root = document.getElementById('score');
-        let activeBorder = document.getElementById('active-border');
 
         this.swiperSlides = root.getElementsByClassName('swiper-slide');
         this.paginationSlides = root.getElementsByClassName('pagination-slide');
