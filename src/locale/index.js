@@ -8,7 +8,7 @@ import ja from './ja';
 // ----------------------------------------------------------------------------
 
 export default createI18n({
-    locale: 'ja',
-    fallbackLocale: 'en',
+    locale: 'en',
+    fallbackLocale: 'ja',
     messages: { en, ja, },
 });

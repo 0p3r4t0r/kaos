@@ -26,7 +26,7 @@ export default {
         keyboard: 'キーボード',
         xbox: 'Xbox',        
         playstation: 'プレーステーション',        
-        mobile: 'モビール',        
+        mobile: 'モバイル',        
     },
     howtoplay: `
         動きと回転と色を変わることができます。<br>
