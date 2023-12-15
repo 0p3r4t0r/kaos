@@ -27,8 +27,8 @@
 
 
 <script>
-import Swiper from 'swiper';
-import 'swiper/css';
+import Swiper from 'swiper/bundle';
+import 'swiper/css/bundle';
 import { ACTION_EVENTS } from 'input/events';
 
 const INVALID_SWIPER_ACCEPT_CLASSES = [

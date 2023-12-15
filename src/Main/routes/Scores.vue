@@ -25,7 +25,8 @@
 
 
 <script>
-import Swiper from 'swiper';
+import Swiper from 'swiper/bundle';
+import 'swiper/css/bundle';
 import { SCORES } from 'globals';
 import { ACTION_EVENTS } from 'input/events';
 import Leaderboard from '../components/Leaderboard.vue';

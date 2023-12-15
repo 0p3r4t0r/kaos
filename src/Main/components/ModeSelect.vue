@@ -26,8 +26,8 @@
 
 
 <script>
-import Swiper from 'swiper';
-import 'swiper/css';
+import Swiper from 'swiper/bundle';
+import 'swiper/css/bundle';
 
 import { MODES } from 'globals';
 import { ACTION_EVENTS } from 'input/events';
@@ -62,6 +62,7 @@ export default {
 
     mounted() {
         this.swiper = new Swiper('.swiper-container', {
+            // modules: [ Navigation, Pagination ],
             effect: 'coverflow',
             slidesPerView: 'auto',
             centeredSlides: true,
