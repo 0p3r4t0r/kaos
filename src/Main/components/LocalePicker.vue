@@ -22,8 +22,8 @@ export default {
         return {
             active: false,
             locales: new Map([
-                ['en', { sprite: 'locale-en', button: null }],
                 ['ja', { sprite: 'locale-ja', button: null }],
+                ['en', { sprite: 'locale-en', button: null }],
             ]),
         };
     },
