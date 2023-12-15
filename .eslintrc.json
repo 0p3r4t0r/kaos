@@ -5,7 +5,7 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:vue/essential"
+        "plugin:vue/vue3-recommended"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -35,6 +35,7 @@
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "vue/multi-word-component-names": "off"
     }
 }

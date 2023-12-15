@@ -1,43 +1,26 @@
-<!--
- Kaos
- Copyright (C) 2020 Brian Sutherland (bsuth)
-
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
--->
-
 <template>
-    <div id='score'>
-        <div class='pagination-wrapper'>
-            <span
-                v-for='(modeScores, mode) in scores'
-                :key='mode'
-                class='pagination-slide'
-            >
-                {{ $t(`modes.${mode}.label`) }}
-            </span>
-        </div>
-        <div class='swiper-container'>
-            <div class='swiper-wrapper'>
-                <div
-                    v-for='(modeScores, mode) in scores'
-                    :key='mode'
-                    class='swiper-slide'
-                >
-                    <Leaderboard :scores='modeScores' />
-                </div>
-            </div>
-        </div>
+  <div id="score">
+    <div class="pagination-wrapper">
+      <span
+        v-for="(modeScores, mode) in scores"
+        :key="mode"
+        class="pagination-slide"
+      >
+        {{ $t(`modes.${mode}.label`) }}
+      </span>
     </div>
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div
+          v-for="(modeScores, mode) in scores"
+          :key="mode"
+          class="swiper-slide"
+        >
+          <Leaderboard :scores="modeScores" />
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 
@@ -49,21 +32,6 @@ import Leaderboard from '../components/Leaderboard.vue';
 
 export default {
     components: { Leaderboard },
-
-    methods: {
-        goto: function(idx) {
-            this.swiper.slideTo(idx);
-
-            for (let i = 0; i < this.paginationSlides.length; ++i) {
-                let cl = this.paginationSlides[i].classList;
-                (i == idx) ?
-                    cl.add('pagination-slide-active') :
-                    cl.remove('pagination-slide-active');
-            }
-        },
-        next: function() { this.swiper.slideNext(); },
-        prev: function() { this.swiper.slidePrev(); },
-    },
 
     data() {
         return {
@@ -103,9 +71,24 @@ export default {
         window.addEventListener(ACTION_EVENTS.LEFT, this.prev);
     },
 
-    beforeDestroy() {
+    beforeUnmount() {
         window.removeEventListener(ACTION_EVENTS.RIGHT, this.next);
         window.removeEventListener(ACTION_EVENTS.LEFT, this.prev);
+    },
+
+    methods: {
+        goto: function(idx) {
+            this.swiper.slideTo(idx);
+
+            for (let i = 0; i < this.paginationSlides.length; ++i) {
+                let cl = this.paginationSlides[i].classList;
+                (i == idx) ?
+                    cl.add('pagination-slide-active') :
+                    cl.remove('pagination-slide-active');
+            }
+        },
+        next: function() { this.swiper.slideNext(); },
+        prev: function() { this.swiper.slidePrev(); },
     },
 };
 </script>
