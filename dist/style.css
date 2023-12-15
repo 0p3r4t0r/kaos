@@ -36,7 +36,7 @@ footer[data-v-0577e2da]{min-height:50px;height:50px;margin-top:50px}ul[data-v-05
 
 #game[data-v-05812926]{height:100%;position:relative}
 
-#app{height:100%;position:relative}
+#app{height:100%;position:relative;overflow:clip}
 
 canvas{width:100%;height:100%;padding-top:50px;position:absolute;top:0;left:0}.fade-enter-active,.fade-leave-active{transition:opacity .2s}.fade-enter,.fade-leave-to{opacity:0}.swiper-container .swiper-slide{opacity:0.5;background-position:center;background-size:cover}.swiper-container .swiper-slide-active{opacity:1}.swiper-container .swiper-pagination .swiper-pagination-bullet{background:#e8e8e8}.swiper-container .swiper-pagination .swiper-pagination-bullet-active{background:#76e635}*{box-sizing:border-box}html,body{height:100%;margin:0;padding:0;color:#e8e8e8;background:#080808;font-family:'Quicksand', arial}a{color:#e8e8e8;text-decoration:none;outline:none}ul{margin:0;padding:0;list-style-type:none}object{pointer-events:none}
 
