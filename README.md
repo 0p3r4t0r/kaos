@@ -26,7 +26,7 @@ Currently, the following input mediums are supported:
 1. Keyboard
 2. Xbox Controller
 3. Playstation Controller
-4. Mobile Touchscreen ([NippleJs](https://github.com/yoannmoinet/nipplejs))
+4. Mobile Touch Controls ([Hammer.JS](https://hammerjs.github.io/))
 
 ## Languages
 Currently, the following languages are supported:
