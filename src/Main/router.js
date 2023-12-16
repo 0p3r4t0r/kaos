@@ -1,4 +1,4 @@
-import * as VueRouter from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 
 import Home from './routes/Home.vue';
 import About from './routes/About.vue';
@@ -18,7 +18,7 @@ const routes = [
     { path: '/settings', component: Settings },
 ];
 
-export default new VueRouter.createRouter({ 
-    history: VueRouter.createWebHashHistory(),
+export default createRouter({ 
+    history: createWebHashHistory(),
     routes
 });

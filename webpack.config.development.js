@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer');
 
 // -----------------------------------------------------------------------------
 // DEPLOYMENT BUILD
@@ -81,6 +82,7 @@ module.exports = {
         new webpack.DefinePlugin({
             __VUE_OPTIONS_API__: true,
             __VUE_PROD_DEVTOOLS__: false,
-        })
+        }),
+        new BundleAnalyzerPlugin.BundleAnalyzerPlugin()
     ],
 };
