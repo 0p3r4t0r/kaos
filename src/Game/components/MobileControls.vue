@@ -35,7 +35,7 @@ import {
 import { CONTEXTS, getContext } from 'input/state';
 import Sprite from 'components/Sprite';
 import Joystick from './Joystick';
-import Hammer from 'hammerjs';
+import Hammer from 'hammerjs/hammer.min';
 
 export default {
     components: { Joystick, Sprite },
