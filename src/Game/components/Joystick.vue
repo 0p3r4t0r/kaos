@@ -24,6 +24,14 @@ export default {
             type: Function,
             required: true,
         },
+        knobColor: {
+            type: String,
+            default: 'white',
+        },
+        backgroundColor: {
+            type: String,
+            default: '#383838',
+        }
     },
 
     data() {
@@ -35,25 +43,32 @@ export default {
     },
     
     mounted() {
-        const canvas = document.getElementById('move-joystick');
+        const canvas = document.getElementById(this.id);
         const ctx = canvas.getContext('2d');
-        ctx.strokeStyle = 'white';
         ctx.lineWidth = 2;
 
-        // border
+        // background
         ctx.beginPath();
         ctx.arc(JOYSTICK_RADIUS, JOYSTICK_RADIUS, JOYSTICK_RADIUS, 0, 2 * Math.PI);
+
+        ctx.fillStyle = this.backgroundColor;
+        ctx.fill();
+
+        ctx.strokeStyle = this.backgroundColor;
         ctx.stroke();
 
         // knob
         ctx.beginPath();
-        ctx.fillStyle = 'white';
-        ctx.arc(JOYSTICK_RADIUS, JOYSTICK_RADIUS, JOYSTICK_RADIUS * 0.69, 0, 2 * Math.PI);
+        ctx.arc(JOYSTICK_RADIUS, JOYSTICK_RADIUS, JOYSTICK_RADIUS * 0.65, 0, 2 * Math.PI);
+
+        ctx.fillStyle = this.knobColor;
         ctx.fill();
 
+        // events
         const hammertime = new Hammer(canvas);
         hammertime.get('pan').set({ direction: Hammer.DIRECTION_ALL });
 
+        // https://hammerjs.github.io/api/#Event-object:~:text=pointers)%3B%0A%7D)%3B-,Event%20object,-All%20events%20that
         hammertime.on('panmove', (ev) => {
             this.onMove(ev);
         });

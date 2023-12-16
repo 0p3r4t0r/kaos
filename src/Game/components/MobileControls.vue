@@ -16,7 +16,12 @@
       :on-move="moveJoystickOnMove"
       :on-end="moveJoystickOnEnd"
     />
-    <!-- <div id="color-joystick" /> -->
+
+    <Joystick
+      id="color-joystick"
+      :on-move="colorJoystickOnMove"
+      :on-end="colorJoystickOnEnd"
+    />
   </div>
 </template>
 
@@ -30,6 +35,7 @@ import {
 import { CONTEXTS, getContext } from 'input/state';
 import Sprite from 'components/Sprite';
 import Joystick from './Joystick';
+import Hammer from 'hammerjs';
 
 export default {
     components: { Joystick, Sprite },
@@ -61,36 +67,10 @@ export default {
                 unregister(DURATION_EVENTS.ROTATE_CC, 'mobile-controls-rotate-cc');
         });
 
-        // hammertime.on('panmove', (event) => {
-        //     (getContext() == CONTEXTS.MENU) ? this.menuMove(event.deltaX, event.deltaY) : this.gameMove(event.deltaX, event.deltaY);
-        // });
-        // hammertime.on('panend', () => {
-        //     (getContext() == CONTEXTS.MENU) ? this.menuEnd() : this.gameEnd();
-        // });
-
         return;
-
-        // COLOR NIPPLE
-        // this.colorNipple = nipplejs.create({
-        //     zone: document.getElementById('color-nipple'),
-        //     mode: 'static',
-        //     position: { right: (NIPPLE_RADIUS + 30) + 'px', bottom: (NIPPLE_RADIUS + 30) + 'px' },
-        //     size: 2 * NIPPLE_RADIUS,
-        // });
-
-        // this.colorNipple.on('dir:up', () => register(ACTION_EVENTS.RED, 'nipple-red'));
-        // this.colorNipple.on('dir:down', () => register(ACTION_EVENTS.GREEN, 'nipple-green'));
-        // this.colorNipple.on('dir:left', () => register(ACTION_EVENTS.CYAN, 'nipple-cyan'));
-        // this.colorNipple.on('dir:right', () => register(ACTION_EVENTS.PURPLE, 'nipple-purple'));
-
-        // this.colorNipple.on('end', () => {
-        //     unregister(ACTION_EVENTS.RED, 'nipple-red');
-        //     unregister(ACTION_EVENTS.GREEN, 'nipple-green');
-        //     unregister(ACTION_EVENTS.CYAN, 'nipple-cyan');
-        //     unregister(ACTION_EVENTS.PURPLE, 'nipple-purple');
-        // });
     },
 
+    // Convention: left, right, up, down
     methods: {
         menuMove: function (x, y) {
             (x < -0.5) ?
@@ -109,8 +89,8 @@ export default {
         menuEnd: function () {
             unregister(ACTION_EVENTS.LEFT, 'joystick-left');
             unregister(ACTION_EVENTS.RIGHT, 'joystick-right');
-            unregister(ACTION_EVENTS.DOWN, 'joystick-down');
             unregister(ACTION_EVENTS.UP, 'joystick-up');
+            unregister(ACTION_EVENTS.DOWN, 'joystick-down');
         },
         gameMove: function (x, y) {
             (x < -0.5) ?
@@ -129,14 +109,31 @@ export default {
         gameEnd: function () {
             unregister(DURATION_EVENTS.LEFT, 'joystick-left');
             unregister(DURATION_EVENTS.RIGHT, 'joystick-right');
-            unregister(DURATION_EVENTS.DOWN, 'joystick-down');
             unregister(DURATION_EVENTS.UP, 'joystick-up');
+            unregister(DURATION_EVENTS.DOWN, 'joystick-down');
         },
         moveJoystickOnMove: function (event) {
             (getContext() == CONTEXTS.MENU) ? this.menuMove(event.deltaX, event.deltaY) : this.gameMove(event.deltaX, event.deltaY);
         },
         moveJoystickOnEnd: function () {
             (getContext() == CONTEXTS.MENU) ? this.menuEnd() : this.gameEnd();
+        },
+        colorJoystickOnMove: function (event) {
+            if (event.direction == Hammer.DIRECTION_LEFT) {
+                register(ACTION_EVENTS.RED, 'joystick-cyan');
+            } else if (event.direction == Hammer.DIRECTION_RIGHT) {
+                register(ACTION_EVENTS.GREEN, 'joystick-purple');
+            } else if (event.direction == Hammer.DIRECTION_UP) {
+                register(ACTION_EVENTS.CYAN, 'joystick-red');
+            } else if (event.direction == Hammer.DIRECTION_DOWN) {
+                register(ACTION_EVENTS.PURPLE, 'joystick-green');
+            }
+        },
+        colorJoystickOnEnd: function () {
+            unregister(ACTION_EVENTS.CYAN, 'joystick-cyan');
+            unregister(ACTION_EVENTS.PURPLE, 'joystick-purple');
+            unregister(ACTION_EVENTS.RED, 'joystick-red');
+            unregister(ACTION_EVENTS.GREEN, 'joystick-green');
         }
     },
 };
@@ -144,6 +141,7 @@ export default {
 
 <style lang='scss' scoped>
 @import 'style/globals';
+@import 'style/palette';
 
 $control-margin: 30px;
 $control-spacing: 20px;
@@ -172,12 +170,27 @@ $control-spacing: 20px;
     right: $control-margin + $SPRITE_SIZE + $control-spacing;
 }
 
-// TODO: cleaner CSS
 #move-joystick {
-    border: dashed pink 2px;
+    position: absolute;
+    left: $control-margin;
+    bottom: $control-margin;
 
+    border: solid 2px $grey;
+    border-radius: 100%;
+}
+
+#color-joystick {
     position: absolute;
     right: $control-margin + ($SPRITE_SIZE + $control-spacing - $JOYSTICK_RADIUS) / 2;
     bottom: $control-margin;
+
+    border: solid;
+    border-width: 8px;
+    border-radius: 100%;
+    border-left-color: $cyan;
+    border-right-color: $purple;
+    border-top-color: $red;
+    border-bottom-color: $green;
+
 }
 </style>
