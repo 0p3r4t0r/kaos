@@ -74,11 +74,9 @@ export default {
             },
 
             on: {
-                click: (event) => {
-                    let classList = event.target.classList;
-
+                click: (swiper) => {
                     for (let cssClass of INVALID_SWIPER_ACCEPT_CLASSES)
-                        if (classList.contains(cssClass))
+                        if (swiper.classNames.includes(cssClass))
                             return;
 
                     this.accept();
