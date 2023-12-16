@@ -11,17 +11,16 @@
       class="rotate"
     />
 
-    <canvas
+    <Joystick
       id="move-joystick"
-      :width="JOYSTICK_SIZE"
-      :height="JOYSTICK_SIZE"
+      :on-move="moveJoystickOnMove"
+      :on-end="moveJoystickOnEnd"
     />
     <!-- <div id="color-joystick" /> -->
   </div>
 </template>
 
 <script>
-import { JOYSTICK_RADIUS } from 'globals';
 import {
     DURATION_EVENTS,
     ACTION_EVENTS,
@@ -30,20 +29,10 @@ import {
 } from 'input/events';
 import { CONTEXTS, getContext } from 'input/state';
 import Sprite from 'components/Sprite';
-import Hammer from 'hammerjs';
+import Joystick from './Joystick';
 
 export default {
-    components: { Sprite },
-
-    data() {
-        const JOYSTICK_SIZE = JOYSTICK_RADIUS * 2;
-
-        return {
-            moveNipple: null,
-            colorNipple: null,
-            JOYSTICK_SIZE,
-        };
-    },
+    components: { Joystick, Sprite },
 
     mounted() {
         // ROTATE
@@ -72,32 +61,12 @@ export default {
                 unregister(DURATION_EVENTS.ROTATE_CC, 'mobile-controls-rotate-cc');
         });
 
-        // MOVEMENT JOYSTICK
-        const canvas = document.getElementById('move-joystick');
-        const ctx = canvas.getContext('2d');
-        ctx.strokeStyle = 'white';
-        ctx.lineWidth = 2;
-
-        // border
-        ctx.beginPath();
-        ctx.arc(JOYSTICK_RADIUS, JOYSTICK_RADIUS, JOYSTICK_RADIUS, 0, 2 * Math.PI);
-        ctx.stroke();
-
-        // knob
-        ctx.beginPath();
-        ctx.fillStyle = 'white';
-        ctx.arc(JOYSTICK_RADIUS, JOYSTICK_RADIUS, JOYSTICK_RADIUS * 0.69, 0, 2 * Math.PI);
-        ctx.fill();
-
-        const hammertime = new Hammer(canvas);
-        hammertime.get('pan').set({ direction: Hammer.DIRECTION_ALL });
-
-        hammertime.on('panmove', (event) => {
-            (getContext() == CONTEXTS.MENU) ? this.menuMove(event.deltaX, event.deltaY) : this.gameMove(event.deltaX, event.deltaY);
-        });
-        hammertime.on('panend', () => {
-            (getContext() == CONTEXTS.MENU) ? this.menuEnd() : this.gameEnd();
-        });
+        // hammertime.on('panmove', (event) => {
+        //     (getContext() == CONTEXTS.MENU) ? this.menuMove(event.deltaX, event.deltaY) : this.gameMove(event.deltaX, event.deltaY);
+        // });
+        // hammertime.on('panend', () => {
+        //     (getContext() == CONTEXTS.MENU) ? this.menuEnd() : this.gameEnd();
+        // });
 
         return;
 
@@ -163,6 +132,12 @@ export default {
             unregister(DURATION_EVENTS.DOWN, 'joystick-down');
             unregister(DURATION_EVENTS.UP, 'joystick-up');
         },
+        moveJoystickOnMove: function (event) {
+            (getContext() == CONTEXTS.MENU) ? this.menuMove(event.deltaX, event.deltaY) : this.gameMove(event.deltaX, event.deltaY);
+        },
+        moveJoystickOnEnd: function () {
+            (getContext() == CONTEXTS.MENU) ? this.menuEnd() : this.gameEnd();
+        }
     },
 };
 </script>
