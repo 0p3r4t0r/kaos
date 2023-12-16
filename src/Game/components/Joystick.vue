@@ -8,7 +8,7 @@
 
 <script>
 import { JOYSTICK_RADIUS } from 'globals';
-import Hammer from 'hammerjs';
+import Hammer from 'hammerjs/hammer.min';
 
 export default {
     props: {
