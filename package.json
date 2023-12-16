@@ -23,7 +23,8 @@
     "serve:dev": "npx http-server -o devdist",
     "start": "npm run build; npm run serve",
     "start:dev": "npm run build:dev; npm run serve:dev",
-    "deploy": "npm run build; git subtree push --prefix dist origin gh-pages"
+    "deploy": "npm run build; git subtree push --prefix dist origin gh-pages",
+    "deploy:recreate": "git push origin -d gh-pages; npm run deploy"
   },
   "repository": {
     "type": "git",
