@@ -1,4 +1,4 @@
-import { COLORS, NIPPLE_RADIUS, IS_TOUCH_DEVICE, HUD_HEIGHT } from 'globals';
+import { COLORS, JOYSTICK_RADIUS, IS_TOUCH_DEVICE, HUD_HEIGHT } from 'globals';
 import { DURATION_EVENTS, ACTION_EVENTS } from 'input/events';
 import { reactive } from 'vue';
 
@@ -256,8 +256,8 @@ function _resize() {
 
     // If touch device, make some room for the nipple.
     // if (IS_TOUCH_DEVICE) {
-    //     canvas.height -= NIPPLE_RADIUS * 2;
-    //     canvas.style.paddingBottom = NIPPLE_RADIUS * 2 + 'px';
+    //     canvas.height -= JOYSTICK_RADIUS * 2;
+    //     canvas.style.paddingBottom = JOYSTICK_RADIUS * 2 + 'px';
     // }
 }
 
