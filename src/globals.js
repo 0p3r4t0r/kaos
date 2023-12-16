@@ -132,4 +132,5 @@ export const ORB_RADIUS_SQUARE = ORB_RADIUS**2;
 /*
  * Number of orbs per 1000 pixels of canvas perimeter.
  */
-export const ORB_DENSITY = 5;
+// TODO(0p3r4t0r): Set this back to 5
+export const ORB_DENSITY = 0;

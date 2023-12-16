@@ -118,7 +118,7 @@ export function gameloop() {
  */
 export function initCanvas() {
     // Init core canvas references
-    canvas = document.getElementById('canvas');
+    canvas = document.getElementById('game-canvas');
     _ctx = canvas.getContext('2d');
     _resize();
 

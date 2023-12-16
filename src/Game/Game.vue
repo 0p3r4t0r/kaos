@@ -1,6 +1,6 @@
 <template>
   <div id="game">
-    <canvas id="canvas" />
+    <canvas id="game-canvas" />
     <Hud />
     <component :is="dialog" />
     <MobileControls v-if="enableMobileControls" />
