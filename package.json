@@ -15,11 +15,13 @@
   "license": "GPL-3.0",
   "homepage": "https://github.com/0p3r4t0r/kaos",
   "scripts": {
-    "build": "webpack --config webpack.config.production.js",
-    "prod": "npx http-server -o dist",
-    "build:dev": "webpack --config webpack.config.development.js",
     "dev": "webpack-dev-server --config webpack.config.development.js",
-    "start": "npm run build; npm run prod",
+    "build": "webpack --config webpack.config.production.js",
+    "build:dev": "webpack --config webpack.config.development.js",
+    "serve": "npx http-server -o dist",
+    "serve:dev": "npx http-server -o devdist",
+    "start": "npm run build; npm run serve",
+    "start:dev": "npm run build:dev; npm run serve:dev",
     "deploy": "npm run build; git subtree push --prefix dist origin gh-pages"
   },
   "repository": {
@@ -27,6 +29,7 @@
     "url": "git+https://github.com/0p3r4t0r/kaos"
   },
   "dependencies": {
+    "hammerjs": "2.0.8",
     "swiper": "11.0.05",
     "vue": "3.3.11",
     "vue-i18n": "9.8.0",
@@ -44,7 +47,6 @@
     "eslint-plugin-vue": "9.19.2",
     "html-webpack-plugin": "5.5.4",
     "mini-css-extract-plugin": "2.7.6",
-    "nipplejs": "^0.8.5",
     "node-sass": "9.0.0",
     "postcss-loader": "7.3.3",
     "sass-loader": "13.3.2",

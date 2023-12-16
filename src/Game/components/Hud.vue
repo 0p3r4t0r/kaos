@@ -1,6 +1,6 @@
 <template>
   <div id="hud">
-    <!-- {{ $t('hud.nextcolor') }}<div class='player-color' v-bind:class='nextColorClass' /> -->
+    <!-- {{ $t('hud.nextcolor') }}<div class='player-color' :class='nextColorClass' /> -->
     {{ $t('hud.score') }}<span class="score">{{ gameState.score }}</span>
   </div>
 </template>

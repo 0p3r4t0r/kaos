@@ -36,7 +36,7 @@ export const MODES = Object.freeze([
 export const TABLET = 600;
 export const DESKTOP = 800;
 export const HUD_HEIGHT = 50;
-export const NIPPLE_RADIUS = 40;
+export const JOYSTICK_RADIUS = 40;
 export const SPRITE_SIZE = 50;
 
 // -----------------------------------------------------------------------------
@@ -72,7 +72,7 @@ if ('maxTouchPoints' in navigator) {
 }
 
 /*
- * Whether the device should you touch features (NippleJS).
+ * Whether the device should you touch features.
  */
 export const IS_TOUCH_DEVICE = _isTouchDevice;
 

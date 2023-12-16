@@ -44,5 +44,6 @@ export default {
 
     /* This is needed to prevent the canvas from blocking certain clickables! */
     position: relative;
+    overflow: clip;
 }
 </style>

@@ -1,8 +1,5 @@
 <template>
   <div id="mobile-controls">
-    <div id="move-nipple" />
-    <div id="color-nipple" />
-
     <Sprite
       id="mobile-controls-rotate"
       sprite="rotate"
@@ -13,12 +10,22 @@
       sprite="rotate-cc"
       class="rotate"
     />
+
+    <Joystick
+      id="move-joystick"
+      :on-move="moveJoystickOnMove"
+      :on-end="moveJoystickOnEnd"
+    />
+
+    <Joystick
+      id="color-joystick"
+      :on-move="colorJoystickOnMove"
+      :on-end="colorJoystickOnEnd"
+    />
   </div>
 </template>
 
 <script>
-import nipplejs from 'nipplejs';
-import { NIPPLE_RADIUS } from 'globals';
 import {
     DURATION_EVENTS,
     ACTION_EVENTS,
@@ -27,54 +34,13 @@ import {
 } from 'input/events';
 import { CONTEXTS, getContext } from 'input/state';
 import Sprite from 'components/Sprite';
+import Joystick from './Joystick';
+import Hammer from 'hammerjs';
 
 export default {
-    components: { Sprite },
-
-    data() {
-        return {
-            moveNipple: null,
-            colorNipple: null,
-        };
-    },
+    components: { Joystick, Sprite },
 
     mounted() {
-        // MOVEMENT NIPPLE
-        this.moveNipple = nipplejs.create({
-            zone: document.getElementById('move-nipple'),
-            mode: 'static',
-            position: { left: (NIPPLE_RADIUS + 30) + 'px', bottom: (NIPPLE_RADIUS + 30) + 'px' },
-            size: 2 * NIPPLE_RADIUS,
-        });
-
-        this.moveNipple.on('move', (event, data) => {
-            (getContext() == CONTEXTS.MENU) ? this.menuMove(data) : this.gameMove(data);
-        });
-
-        this.moveNipple.on('end', (event, data) => {
-            (getContext() == CONTEXTS.MENU) ? this.menuEnd() : this.gameEnd();
-        });
-
-        // COLOR NIPPLE
-        this.colorNipple = nipplejs.create({
-            zone: document.getElementById('color-nipple'),
-            mode: 'static',
-            position: { right: (NIPPLE_RADIUS + 30) + 'px', bottom: (NIPPLE_RADIUS + 30) + 'px' },
-            size: 2 * NIPPLE_RADIUS,
-        });
-
-        this.colorNipple.on('dir:up', () => register(ACTION_EVENTS.RED, 'nipple-red'));
-        this.colorNipple.on('dir:down', () => register(ACTION_EVENTS.GREEN, 'nipple-green'));
-        this.colorNipple.on('dir:left', () => register(ACTION_EVENTS.CYAN, 'nipple-cyan'));
-        this.colorNipple.on('dir:right', () => register(ACTION_EVENTS.PURPLE, 'nipple-purple'));
-
-        this.colorNipple.on('end', () => {
-            unregister(ACTION_EVENTS.RED, 'nipple-red');
-            unregister(ACTION_EVENTS.GREEN, 'nipple-green');
-            unregister(ACTION_EVENTS.CYAN, 'nipple-cyan');
-            unregister(ACTION_EVENTS.PURPLE, 'nipple-purple');
-        });
-
         // ROTATE
         document.getElementById('mobile-controls-rotate').addEventListener('touchstart', () => {
             (getContext() == CONTEXTS.MENU) ?
@@ -100,59 +66,89 @@ export default {
                 unregister(ACTION_EVENTS.BACK, 'mobile-controls-back') :
                 unregister(DURATION_EVENTS.ROTATE_CC, 'mobile-controls-rotate-cc');
         });
+
+        return;
     },
 
+    // Convention: left, right, up, down
     methods: {
-        menuMove: function (data) {
-            (data.vector.x < -0.5) ?
-                register(ACTION_EVENTS.LEFT, 'nipple-left') :
-                unregister(ACTION_EVENTS.LEFT, 'nipple-left');
-            (data.vector.x > 0.5) ?
-                register(ACTION_EVENTS.RIGHT, 'nipple-right') :
-                unregister(ACTION_EVENTS.RIGHT, 'nipple-right');
-            (data.vector.y < -0.5) ?
-                register(ACTION_EVENTS.DOWN, 'nipple-down') :
-                unregister(ACTION_EVENTS.DOWN, 'nipple-down');
-            (data.vector.y > 0.5) ?
-                register(ACTION_EVENTS.UP, 'nipple-up') :
-                unregister(ACTION_EVENTS.UP, 'nipple-up');
+        menuMove: function (x, y) {
+            (x < -0.5) ?
+                register(ACTION_EVENTS.LEFT, 'joystick-left') :
+                unregister(ACTION_EVENTS.LEFT, 'joystick-left');
+            (x > 0.5) ?
+                register(ACTION_EVENTS.RIGHT, 'joystick-right') :
+                unregister(ACTION_EVENTS.RIGHT, 'joystick-right');
+            (y < -0.5) ?
+                register(ACTION_EVENTS.UP, 'joystick-up') :
+                unregister(ACTION_EVENTS.UP, 'joystick-up');
+            (y > 0.5) ?
+                register(ACTION_EVENTS.DOWN, 'joystick-down') :
+                unregister(ACTION_EVENTS.DOWN, 'joystick-down');
         },
         menuEnd: function () {
-            unregister(ACTION_EVENTS.LEFT, 'nipple-left');
-            unregister(ACTION_EVENTS.RIGHT, 'nipple-right');
-            unregister(ACTION_EVENTS.DOWN, 'nipple-down');
-            unregister(ACTION_EVENTS.UP, 'nipple-up');
+            unregister(ACTION_EVENTS.LEFT, 'joystick-left');
+            unregister(ACTION_EVENTS.RIGHT, 'joystick-right');
+            unregister(ACTION_EVENTS.UP, 'joystick-up');
+            unregister(ACTION_EVENTS.DOWN, 'joystick-down');
         },
-        gameMove: function (data) {
-            (data.vector.x < -0.5) ?
-                register(DURATION_EVENTS.LEFT, 'nipple-left') :
-                unregister(DURATION_EVENTS.LEFT, 'nipple-left');
-            (data.vector.x > 0.5) ?
-                register(DURATION_EVENTS.RIGHT, 'nipple-right') :
-                unregister(DURATION_EVENTS.RIGHT, 'nipple-right');
-            (data.vector.y < -0.5) ?
-                register(DURATION_EVENTS.DOWN, 'nipple-down') :
-                unregister(DURATION_EVENTS.DOWN, 'nipple-down');
-            (data.vector.y > 0.5) ?
-                register(DURATION_EVENTS.UP, 'nipple-up') :
-                unregister(DURATION_EVENTS.UP, 'nipple-up');
+        gameMove: function (x, y) {
+            (x < -0.5) ?
+                register(DURATION_EVENTS.LEFT, 'joystick-left') :
+                unregister(DURATION_EVENTS.LEFT, 'joystick-left');
+            (x > 0.5) ?
+                register(DURATION_EVENTS.RIGHT, 'joystick-right') :
+                unregister(DURATION_EVENTS.RIGHT, 'joystick-right');
+            (y < -0.5) ?
+                register(DURATION_EVENTS.UP, 'joystick-up') :
+                unregister(DURATION_EVENTS.UP, 'joystick-up');
+            (y > 0.5) ?
+                register(DURATION_EVENTS.DOWN, 'joystick-down') :
+                unregister(DURATION_EVENTS.DOWN, 'joystick-down');
         },
         gameEnd: function () {
-            unregister(DURATION_EVENTS.LEFT, 'nipple-left');
-            unregister(DURATION_EVENTS.RIGHT, 'nipple-right');
-            unregister(DURATION_EVENTS.DOWN, 'nipple-down');
-            unregister(DURATION_EVENTS.UP, 'nipple-up');
+            unregister(DURATION_EVENTS.LEFT, 'joystick-left');
+            unregister(DURATION_EVENTS.RIGHT, 'joystick-right');
+            unregister(DURATION_EVENTS.UP, 'joystick-up');
+            unregister(DURATION_EVENTS.DOWN, 'joystick-down');
         },
+        moveJoystickOnMove: function (event) {
+            (getContext() == CONTEXTS.MENU) ? this.menuMove(event.deltaX, event.deltaY) : this.gameMove(event.deltaX, event.deltaY);
+        },
+        moveJoystickOnEnd: function () {
+            (getContext() == CONTEXTS.MENU) ? this.menuEnd() : this.gameEnd();
+        },
+        colorJoystickOnMove: function (event) {
+            if (event.direction == Hammer.DIRECTION_LEFT) {
+                register(ACTION_EVENTS.RED, 'joystick-cyan');
+            } else if (event.direction == Hammer.DIRECTION_RIGHT) {
+                register(ACTION_EVENTS.GREEN, 'joystick-purple');
+            } else if (event.direction == Hammer.DIRECTION_UP) {
+                register(ACTION_EVENTS.CYAN, 'joystick-red');
+            } else if (event.direction == Hammer.DIRECTION_DOWN) {
+                register(ACTION_EVENTS.PURPLE, 'joystick-green');
+            }
+        },
+        colorJoystickOnEnd: function () {
+            unregister(ACTION_EVENTS.CYAN, 'joystick-cyan');
+            unregister(ACTION_EVENTS.PURPLE, 'joystick-purple');
+            unregister(ACTION_EVENTS.RED, 'joystick-red');
+            unregister(ACTION_EVENTS.GREEN, 'joystick-green');
+        }
     },
 };
 </script>
 
 <style lang='scss' scoped>
 @import 'style/globals';
+@import 'style/palette';
+
+$control-margin: 30px;
+$control-spacing: 20px;
 
 #mobile-controls {
     width: 100%;
-    height: 2 * $NIPPLE_RADIUS + $SPRITE_SIZE + 50px;
+    height: 2 * $JOYSTICK_RADIUS + $SPRITE_SIZE + 50px;
     position: fixed;
     bottom: 0;
     z-index: 2;
@@ -167,10 +163,34 @@ export default {
 }
 
 #mobile-controls-rotate {
-    right: 30px;
+    right: $control-margin;
 }
 
 #mobile-controls-rotate-cc {
-    right: 30px + $SPRITE_SIZE + 20px;
+    right: $control-margin + $SPRITE_SIZE + $control-spacing;
+}
+
+#move-joystick {
+    position: absolute;
+    left: $control-margin;
+    bottom: $control-margin;
+
+    border: solid 2px $grey;
+    border-radius: 100%;
+}
+
+#color-joystick {
+    position: absolute;
+    right: $control-margin + ($SPRITE_SIZE + $control-spacing - $JOYSTICK_RADIUS) / 2;
+    bottom: $control-margin;
+
+    border: solid;
+    border-width: 8px;
+    border-radius: 100%;
+    border-left-color: $cyan;
+    border-right-color: $purple;
+    border-top-color: $red;
+    border-bottom-color: $green;
+
 }
 </style>

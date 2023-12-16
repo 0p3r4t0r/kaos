@@ -12,7 +12,12 @@
 const SPRITE_SIZE = 55; // 50px + 5px padding
 
 export default {
-    props: ['sprite'],
+    props: {
+        sprite: {
+            type: String,
+            required: true,
+        },
+    },
 
     computed: {
         style: function () {
