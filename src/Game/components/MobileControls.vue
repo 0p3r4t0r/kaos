@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { normalX, normalY } from 'engine/core';
 import {
     DURATION_EVENTS,
     ACTION_EVENTS,
@@ -35,7 +36,6 @@ import {
 import { CONTEXTS, getContext } from 'input/state';
 import Sprite from 'components/Sprite';
 import Joystick from './Joystick';
-import Hammer from 'hammerjs/hammer.min';
 
 export default {
     components: { Joystick, Sprite },
@@ -73,16 +73,19 @@ export default {
     // Convention: left, right, up, down
     methods: {
         menuMove: function (x, y) {
-            (x < -0.5) ?
+            const xHat = normalX(x, y);
+            const yHat = normalY(x, y);
+
+            (xHat < -0.5) ?
                 register(ACTION_EVENTS.LEFT, 'joystick-left') :
                 unregister(ACTION_EVENTS.LEFT, 'joystick-left');
-            (x > 0.5) ?
+            (xHat > 0.5) ?
                 register(ACTION_EVENTS.RIGHT, 'joystick-right') :
                 unregister(ACTION_EVENTS.RIGHT, 'joystick-right');
-            (y < -0.5) ?
+            (yHat < -0.5) ?
                 register(ACTION_EVENTS.UP, 'joystick-up') :
                 unregister(ACTION_EVENTS.UP, 'joystick-up');
-            (y > 0.5) ?
+            (yHat > 0.5) ?
                 register(ACTION_EVENTS.DOWN, 'joystick-down') :
                 unregister(ACTION_EVENTS.DOWN, 'joystick-down');
         },
@@ -93,16 +96,19 @@ export default {
             unregister(ACTION_EVENTS.DOWN, 'joystick-down');
         },
         gameMove: function (x, y) {
-            (x < -0.5) ?
+            const xHat = normalX(x, y);
+            const yHat = normalY(x, y);
+
+            (xHat < -0.5) ?
                 register(DURATION_EVENTS.LEFT, 'joystick-left') :
                 unregister(DURATION_EVENTS.LEFT, 'joystick-left');
-            (x > 0.5) ?
+            (xHat > 0.5) ?
                 register(DURATION_EVENTS.RIGHT, 'joystick-right') :
                 unregister(DURATION_EVENTS.RIGHT, 'joystick-right');
-            (y < -0.5) ?
+            (yHat < -0.5) ?
                 register(DURATION_EVENTS.UP, 'joystick-up') :
                 unregister(DURATION_EVENTS.UP, 'joystick-up');
-            (y > 0.5) ?
+            (yHat > 0.5) ?
                 register(DURATION_EVENTS.DOWN, 'joystick-down') :
                 unregister(DURATION_EVENTS.DOWN, 'joystick-down');
         },
@@ -119,14 +125,15 @@ export default {
             (getContext() == CONTEXTS.MENU) ? this.menuEnd() : this.gameEnd();
         },
         colorJoystickOnMove: function (event) {
-            if (event.direction == Hammer.DIRECTION_LEFT) {
-                register(ACTION_EVENTS.RED, 'joystick-cyan');
-            } else if (event.direction == Hammer.DIRECTION_RIGHT) {
-                register(ACTION_EVENTS.GREEN, 'joystick-purple');
-            } else if (event.direction == Hammer.DIRECTION_UP) {
-                register(ACTION_EVENTS.CYAN, 'joystick-red');
-            } else if (event.direction == Hammer.DIRECTION_DOWN) {
-                register(ACTION_EVENTS.PURPLE, 'joystick-green');
+            const { angle } = event;
+            if (135 < angle || angle < -135) { // left
+                register(ACTION_EVENTS.CYAN, 'joystick-cyan');
+            } else if (-45 < angle && angle < 45) { // right
+                register(ACTION_EVENTS.PURPLE, 'joystick-purple');
+            } else if (-135 < angle && angle < -45) { // up
+                register(ACTION_EVENTS.RED, 'joystick-red');
+            } else if (45 < angle && angle < 135) { // down
+                register(ACTION_EVENTS.GREEN, 'joystick-green');
             }
         },
         colorJoystickOnEnd: function () {
