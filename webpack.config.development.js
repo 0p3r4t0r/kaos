@@ -24,6 +24,7 @@ module.exports = {
         allowedHosts: [ 'all' ],
         static: {
             directory: path.join(__dirname, 'devdist'),
+            publicPath: '/kaos/',
         },
         compress: true,
         port: 9000,
@@ -74,6 +75,7 @@ module.exports = {
         new WorkboxPlugin.GenerateSW({
             clientsClaim: true,
             skipWaiting: true,
+            maximumFileSizeToCacheInBytes: 3000000,
         }),
         new CopyWebpackPlugin({
             patterns: [
