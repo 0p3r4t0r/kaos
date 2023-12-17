@@ -1,7 +1,6 @@
 <template>
   <div id="scores">
-    <KaosHeader />
-    <div id="scores-inner">
+    <KaosHeader>
       <div class="pagination-wrapper">
         <span
           v-for="(modeScores, mode) in scores"
@@ -11,15 +10,15 @@
           {{ $t(`modes.${mode}.label`) }}
         </span>
       </div>
-      <div class="swiper-container">
-        <div class="swiper-wrapper">
-          <div
-            v-for="(modeScores, mode) in scores"
-            :key="mode"
-            class="swiper-slide"
-          >
-            <Leaderboard :scores="modeScores" />
-          </div>
+    </KaosHeader>
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div
+          v-for="(modeScores, mode) in scores"
+          :key="mode"
+          class="swiper-slide"
+        >
+          <Leaderboard :scores="modeScores" />
         </div>
       </div>
     </div>
@@ -109,20 +108,9 @@ export default {
 // -----------------------------------------------------------------------------
 
 #scores {
+    width: 60%;
     @include flex-center;
     @include flex-direction;
-    @media screen and (orientation:landscape) { 
-        width: 80%;
-        height: 100%;
-    }
-    width: 100%;
-}
-
-#scores-inner {
-    @media screen and (orientation:landscape) { 
-        height: 100%;
-    }
-    width: 100%;
 }
 
 // -----------------------------------------------------------------------------
@@ -131,7 +119,6 @@ export default {
 
 .swiper-container {
     width: 100%;
-    max-height: 200px;
 }
 
 // -----------------------------------------------------------------------------

@@ -29,7 +29,8 @@ export default {
         mobile: 'Mobile',        
     },
     howtoplay: `
-        Dodge orbs of colors different than your own.<br>
+        Dodge orbs of colors different <br>
+        than your own.<br>
         Move, rotate and change colors to survive.<br>
         Click any panel to begin.
     `,

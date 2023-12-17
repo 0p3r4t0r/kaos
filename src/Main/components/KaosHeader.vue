@@ -19,10 +19,7 @@
         </div>
       </router-link>
     </header>
-    <p
-      v-if="text"
-      v-html="text"
-    />
+    <slot />
   </div>
 </template>
 
@@ -76,12 +73,6 @@ export default {
   @include flex-center;
   flex-direction: column;
   z-index: 2;
-  
-  p { 
-    text-align: center;
-    max-height: 12em;
-    min-width: 20em;
-  }
 }
 
 // -----------------------------------------------------------------------------
@@ -93,7 +84,6 @@ export default {
     position: relative;
     overflow: hidden;
     outline: 0;
-    // margin-bottom: -20px;
 
     * {
         width: 100%;

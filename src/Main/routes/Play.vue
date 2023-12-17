@@ -1,6 +1,8 @@
 <template>
   <div id="play">
-    <KaosHeader :text="$t('howtoplay')" />
+    <KaosHeader>
+      <p v-html="$t('howtoplay')" />
+    </KaosHeader>
     <ModeSelect />
   </div>
 </template>
@@ -19,8 +21,14 @@ export default {
 @import 'style/mixins/flex-direction';
 
 #play {
-    width: 60%;
+    width: 55%;
     @include flex-center;
     @include flex-direction;
+}
+
+p { 
+  text-align: center;
+  max-height: 12em;
+  min-width: 20em;
 }
 </style>
