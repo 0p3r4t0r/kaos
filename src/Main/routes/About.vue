@@ -25,12 +25,10 @@ export default {
 }
 
 div {
-    width: 80%;
     max-width: 600px;
-}
-
-a {
-    color: $cyan;
-    &:hover { color: $purple }
+    @media screen and (orientation:landscape) { 
+      margin: 0px 30px;
+    }
+      margin: 0px 10px;
 }
 </style>
