@@ -6,6 +6,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer');
 
 // -----------------------------------------------------------------------------
 // PRODUCTION BUILD
@@ -89,5 +90,7 @@ module.exports = {
             __VUE_OPTIONS_API__: true,
             __VUE_PROD_DEVTOOLS__: false,
         }),
+        // Uncommnet to run bundle analyzer
+        // new BundleAnalyzerPlugin.BundleAnalyzerPlugin()
     ],
 };

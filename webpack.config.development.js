@@ -8,7 +8,7 @@ const { VueLoaderPlugin } = require('vue-loader');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer');
 
 // -----------------------------------------------------------------------------
-// DEPLOYMENT BUILD
+// DEVELOPMENT BUILD
 // -----------------------------------------------------------------------------
 
 console.log('-----------------');
@@ -83,6 +83,7 @@ module.exports = {
             __VUE_OPTIONS_API__: true,
             __VUE_PROD_DEVTOOLS__: false,
         }),
-        new BundleAnalyzerPlugin.BundleAnalyzerPlugin()
+        // Uncommnet to run bundle analyzer
+        // new BundleAnalyzerPlugin.BundleAnalyzerPlugin()
     ],
 };
