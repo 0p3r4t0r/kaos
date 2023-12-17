@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="kaos-app">
     <transition
       name="fade"
       mode="out-in"
@@ -39,8 +39,11 @@ export default {
 
 
 <style lang='scss'>
-#app {
+@import 'style/palette';
+
+#kaos-app {
     height: 100%;
+    background-color: $black;
 
     /* This is needed to prevent the canvas from blocking certain clickables! */
     position: relative;

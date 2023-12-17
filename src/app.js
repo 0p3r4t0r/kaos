@@ -15,6 +15,6 @@ const app = createApp(App);
 
 app.use(locale);
 app.use(routes);
-app.mount('#app');
+app.mount('#kaos-root');
 
 export default app;
