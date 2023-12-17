@@ -2,7 +2,7 @@ export default {
     home: {
         play: 'PLAY',
         scores: 'SCORES',
-        settings: 'CONTROLS',
+        controls: 'CONTROLS',
     },
     modes: {
         timed: {
@@ -22,7 +22,7 @@ export default {
         date: 'Date',
         score: 'Score',
     },
-    settings: {
+    controls: {
         keyboard: 'keyboard',        
         xbox: 'Xbox',        
         playstation: 'Playstation',        

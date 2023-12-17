@@ -28,8 +28,8 @@ export default {
                     action: () => this.goto('/scores'),
                 },
                 {
-                    label: 'home.settings',
-                    action: () => this.goto('/settings'),
+                    label: 'home.controls',
+                    action: () => this.goto('/controls'),
                 },
             ],
         };

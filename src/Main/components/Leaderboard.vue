@@ -17,7 +17,12 @@
 
 <script>
 export default {
-    props: [ 'scores' ],
+    props: {
+        scores: {
+            type: Array,
+            required: true,
+        },
+    },
 };
 </script>
 

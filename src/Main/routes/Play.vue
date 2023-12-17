@@ -18,7 +18,7 @@ export default {
 @import 'style/mixins/flex-direction';
 
 #play {
-    width: 50%;
+    width: 60%;
     @include flex-center;
     @include flex-direction
 

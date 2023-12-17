@@ -64,6 +64,7 @@ export default {
     position: relative;
     overflow: hidden;
     outline: 0;
+    z-index: 2;
 
     * {
         width: 100%;

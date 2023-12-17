@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="controls">
     <!-- swiper wrapper -->
     <div class="swiper-container">
       <!-- slide wrapper -->
@@ -42,10 +42,10 @@ export default {
     data() {
         return {
             slides: [
-                { label: 'settings.keyboard', data: 'controls/KeyboardControls.svg' },
-                { label: 'settings.xbox', data: 'controls/XboxControls.svg' },
-                { label: 'settings.playstation', data: 'controls/PlaystationControls.svg' },
-                { label: 'settings.mobile', data: 'controls/MobileControls.svg' },
+                { label: 'controls.keyboard', data: 'controls/KeyboardControls.svg' },
+                { label: 'controls.xbox', data: 'controls/XboxControls.svg' },
+                { label: 'controls.playstation', data: 'controls/PlaystationControls.svg' },
+                { label: 'controls.mobile', data: 'controls/MobileControls.svg' },
             ],
         };
     },
@@ -84,11 +84,18 @@ export default {
 @import 'style/palette';
 
 // -----------------------------------------------------------------------------
+// CONTROLS
+// -----------------------------------------------------------------------------
+#controls {
+    width: 60%;
+}
+
+// -----------------------------------------------------------------------------
 // SWIPER CONTAINER
 // -----------------------------------------------------------------------------
 
 .swiper-container {
-    width: 100%;
+    width: 80%;
     padding-top: 50px;
     padding-bottom: 50px;
 }

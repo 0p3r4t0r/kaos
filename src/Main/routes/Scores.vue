@@ -1,5 +1,5 @@
 <template>
-  <div id="score">
+  <div id="scores">
     <div class="pagination-wrapper">
       <span
         v-for="(modeScores, mode) in scores"
@@ -41,7 +41,7 @@ export default {
     },
 
     mounted() {
-        let root = document.getElementById('score');
+        let root = document.getElementById('scores');
 
         this.swiperSlides = root.getElementsByClassName('swiper-slide');
         this.paginationSlides = root.getElementsByClassName('pagination-slide');
@@ -99,9 +99,12 @@ export default {
 @import 'style/mixins/underline';
 @import 'style/mixins/flex-center';
 
-#score {
-    width: 80%;
-    margin: 20px auto 0;
+// -----------------------------------------------------------------------------
+// SCORES
+// -----------------------------------------------------------------------------
+
+#scores {
+    width: 60%;
 }
 
 // -----------------------------------------------------------------------------

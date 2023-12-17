@@ -2,7 +2,7 @@ export default {
     home: {
         play: 'プレイ',
         scores: 'スコア',
-        settings: 'コントロール',
+        controls: 'コントロール',
     },
     modes: {
         timed: {
@@ -22,7 +22,7 @@ export default {
         date: '年月日',
         score: 'スコア',
     },
-    settings: {
+    controls: {
         keyboard: 'キーボード',
         xbox: 'Xbox',        
         playstation: 'プレーステーション',        
