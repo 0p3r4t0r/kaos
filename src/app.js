@@ -5,6 +5,7 @@ import locale from './locale';
 import routes from './Main/router';
 import 'input';
 import './style/root.scss';
+import './registerServiceWorker';
 
 // -----------------------------------------------------------------------------
 // APP
