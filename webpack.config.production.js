@@ -1,11 +1,12 @@
 const path = require('path');
 
 const webpack = require('webpack');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
+const WorkboxPlugin = require('workbox-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer');
 
 // -----------------------------------------------------------------------------
 // PRODUCTION BUILD
@@ -23,6 +24,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'app.js',
+        clean: true,
     },
 
     resolve: {
@@ -68,11 +70,14 @@ module.exports = {
     },
 
     plugins: [
-        // CleanWebpackPlugin() must be first!
-        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'src/index.html'
+        }),
+        new WorkboxPlugin.GenerateSW({
+            clientsClaim: true,
+            skipWaiting: true,
+            maximumFileSizeToCacheInBytes: 3000000,
         }),
         new CopyWebpackPlugin({
             patterns: [
@@ -89,5 +94,7 @@ module.exports = {
             __VUE_OPTIONS_API__: true,
             __VUE_PROD_DEVTOOLS__: false,
         }),
+        // Uncommnet to run bundle analyzer
+        // new BundleAnalyzerPlugin.BundleAnalyzerPlugin()
     ],
 };

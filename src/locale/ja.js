@@ -11,11 +11,11 @@ export default {
         },
         spin: {
             label: '回転ヒーロー',
-            description: '全回転すると点数がとれる。',
+            description: '全回転する度１ポイント獲得。',
         },
         collector: {
             label: 'コレクター',
-            description: '同色玉を集める。',
+            description: '同じ色のオーブを集める。',
         },
     },
     leaderboard: {
@@ -29,12 +29,12 @@ export default {
         mobile: 'モバイル',        
     },
     howtoplay: `
-        動きと回転と色を変わることができます。<br>
-        プレーヤーの色と異なる玉触れたら、ゲームが終わります。<br>
-        ゲームモードをクリックするとゲームが始まります。
+        移動、回転、色を変えることができます。<br>
+        プレーヤーの色と異なるオーブに触れたらアウトです。<br>
+        ゲームモードを選択してゲームを始めましょう。
     `,
     footer: {
-        about: 'kaos について',        
+        about: 'Kaosについて',        
     },
     pause: {
         resume: '続ける',        
@@ -52,17 +52,17 @@ export default {
     },
     about: `
         <p>
-            Kaosはゲーム開発について習いたい兄弟から開発されたウェブゲームです。
-            概念と試作はコロナ検疫間に生まれました。
+            Kaosはゲーム開発に挑戦した兄弟が開発したウェブゲームです。
+            アイディアはもともとコロナの第一緊急事態宣による自粛中に湧き上がってきました。
             <a href='https://developer.mozilla.org/ja/docs/Web/API/Canvas_API'>
                 Canvas API
             </a>
-            を用いる仕組みがあって、フロントエンドに
+            を使用して、フロントエンドに
             <a href='https://vuejs.org/'>VueJS</a>
-            が使われています。
+            を使うことにしました。
         </p>
         <p>
-            僕たちはKaos開発をよく楽しんでて、プレヤーも楽しめなら開発に足ります。
+            僕たちはKaos開発をよく楽しんでて、プレヤーも楽しめたらな〜と思っております。
             お時間をいただきありがとうございます。
         </p>
         <br />

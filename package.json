@@ -15,7 +15,6 @@
   "license": "GPL-3.0",
   "homepage": "https://github.com/0p3r4t0r/kaos",
   "scripts": {
-    "analyze": "webpack --config webpack.config.production.js --profile --json > stats.json",
     "dev": "webpack-dev-server --config webpack.config.development.js",
     "build": "webpack --config webpack.config.production.js",
     "build:dev": "webpack --config webpack.config.development.js",
@@ -23,7 +22,8 @@
     "serve:dev": "npx http-server -o devdist",
     "start": "npm run build; npm run serve",
     "start:dev": "npm run build:dev; npm run serve:dev",
-    "deploy": "npm run build; git subtree push --prefix dist origin gh-pages"
+    "deploy": "npm run build; git subtree push --prefix dist origin gh-pages",
+    "deploy:recreate": "git push origin -d gh-pages; npm run deploy"
   },
   "repository": {
     "type": "git",
@@ -41,7 +41,6 @@
     "@babel/preset-env": "7.23.6",
     "autoprefixer": "10.4.16",
     "babel-loader": "9.1.3",
-    "clean-webpack-plugin": "4.0.0",
     "copy-webpack-plugin": "11.0.0",
     "css-loader": "6.8.1",
     "eslint": "8.55.0",
@@ -54,8 +53,9 @@
     "vue-loader": "17.3.1",
     "vue-style-loader": "4.1.3",
     "webpack": "5.89.0",
-    "webpack-bundle-analyzer": "^4.10.1",
+    "webpack-bundle-analyzer": "4.10.1",
     "webpack-cli": "5.1.4",
-    "webpack-dev-server": "4.15.1"
+    "webpack-dev-server": "4.15.1",
+    "workbox-webpack-plugin": "7.0.0"
   }
 }
