@@ -21,16 +21,17 @@
 
 <style lang='scss' scoped>
 @import 'style/palette';
-@import 'style/mixins/flex';
-
-footer {
-    min-height: 50px;
-    height: 50px;
-    margin-top: 50px;
-}
+@import 'style/mixins/flex-center';
 
 ul {
+    display: flex;
+    gap: 20px;
+
     @include flex-center;
+    @media screen and (orientation:landscape) { 
+      flex-direction: column;
+    }
+    flex-direction: row;
     li { margin: 0 10px; }
 }
 </style>

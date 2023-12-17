@@ -2,7 +2,7 @@ export default {
     home: {
         play: 'プレイ',
         scores: 'スコア',
-        settings: 'コントロール',
+        controls: 'コントロール',
     },
     modes: {
         timed: {
@@ -22,7 +22,7 @@ export default {
         date: '年月日',
         score: 'スコア',
     },
-    settings: {
+    controls: {
         keyboard: 'キーボード',
         xbox: 'Xbox',        
         playstation: 'プレーステーション',        
@@ -65,7 +65,6 @@ export default {
             僕たちはKaos開発をよく楽しんでて、プレヤーも楽しめたらな〜と思っております。
             お時間をいただきありがとうございます。
         </p>
-        <br />
         <p>開発元</p>
     `,
 };

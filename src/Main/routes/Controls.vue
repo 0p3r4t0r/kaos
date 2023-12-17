@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div id="controls">
+    <KaosHeader />
     <!-- swiper wrapper -->
     <div class="swiper-container">
       <!-- slide wrapper -->
@@ -30,6 +31,7 @@
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
 import { ACTION_EVENTS } from 'input/events';
+import KaosHeader from '../components/KaosHeader.vue';
 
 const INVALID_SWIPER_ACCEPT_CLASSES = [
     'swiper-button-prev',
@@ -38,14 +40,15 @@ const INVALID_SWIPER_ACCEPT_CLASSES = [
 ];
 
 export default {
+    components: { KaosHeader },
 
     data() {
         return {
             slides: [
-                { label: 'settings.keyboard', data: 'controls/KeyboardControls.svg' },
-                { label: 'settings.xbox', data: 'controls/XboxControls.svg' },
-                { label: 'settings.playstation', data: 'controls/PlaystationControls.svg' },
-                { label: 'settings.mobile', data: 'controls/MobileControls.svg' },
+                { label: 'controls.keyboard', data: 'controls/KeyboardControls.svg' },
+                { label: 'controls.xbox', data: 'controls/XboxControls.svg' },
+                { label: 'controls.playstation', data: 'controls/PlaystationControls.svg' },
+                { label: 'controls.mobile', data: 'controls/MobileControls.svg' },
             ],
         };
     },
@@ -82,13 +85,24 @@ export default {
 <style lang='scss' scoped>
 @import 'style/globals';
 @import 'style/palette';
+@import 'style/mixins/flex-center';
+@import 'style/mixins/flex-direction';
+
+// -----------------------------------------------------------------------------
+// CONTROLS
+// -----------------------------------------------------------------------------
+#controls {
+    width: 60%;
+    @include flex-center;
+    @include flex-direction;
+}
 
 // -----------------------------------------------------------------------------
 // SWIPER CONTAINER
 // -----------------------------------------------------------------------------
 
 .swiper-container {
-    width: 100%;
+    width: 80%;
     padding-top: 50px;
     padding-bottom: 50px;
 }

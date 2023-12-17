@@ -1,15 +1,21 @@
 <template>
-  <List
-    :items="items"
-    :active-index="activeIndex"
-  />
+  <div id="home">
+    <KaosHeader />
+    <List
+      :items="items"
+      :active-index="activeIndex"
+    />
+    <KaosFooter />
+  </div>
 </template>
 
 <script>
+import KaosHeader from '../components/KaosHeader.vue';
+import KaosFooter from '../components/KaosFooter.vue';
 import List from 'components/List';
 
 export default {
-    components: { List },
+    components: { KaosHeader, KaosFooter, List },
 
     data() {
         return {
@@ -24,8 +30,8 @@ export default {
                     action: () => this.goto('/scores'),
                 },
                 {
-                    label: 'home.settings',
-                    action: () => this.goto('/settings'),
+                    label: 'home.controls',
+                    action: () => this.goto('/controls'),
                 },
             ],
         };
@@ -45,22 +51,12 @@ export default {
 
 <style lang='scss'>
 @import 'style/globals';
-@import 'style/mixins/flex';
+@import 'style/mixins/flex-center';
+@import 'style/mixins/flex-direction';
 
 #home {
-    /* core */
     @include flex-center;
-    position: relative;
-    overflow: hidden;
-
-    // allow overlapping elements during transitions
-    > * { position: absolute; }
-
-    /* tablet */
-    @media only screen and (min-width: $TABLET) {
-        width: 100%;
-        max-width: 700px;
-        margin: 0 auto;
-    }
+    @include flex-direction;
+    gap: 40px;
 }
 </style>

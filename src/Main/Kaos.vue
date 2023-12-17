@@ -1,7 +1,5 @@
 <template>
   <div id="main">
-    <div class="padding" />
-    <KaosHeader />
     <LocalePicker />
     <router-view v-slot="{ Component }">
       <transition
@@ -11,8 +9,6 @@
         <component :is="Component" />
       </transition>
     </router-view>
-    <div class="padding" />
-    <KaosFooter />
   </div>
 </template>
 
@@ -21,12 +17,10 @@ import { setContext, CONTEXTS } from 'input/state';
 import router from './router.js';
 
 import LocalePicker from './components/LocalePicker.vue';
-import KaosHeader from './components/KaosHeader.vue';
-import KaosFooter from './components/KaosFooter.vue';
 
 export default {
     router,
-    components: { LocalePicker, KaosHeader, KaosFooter },
+    components: { LocalePicker },
 
     mounted() {
         setContext(CONTEXTS.MENU);
@@ -35,24 +29,18 @@ export default {
 </script>
 
 <style lang='scss'>
-@import 'style/mixins/flex';
+@import 'style/mixins/flex-center';
+@import 'style/mixins/flex-direction';
 
 #main {
     height: 100%;
 
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+    @include flex-center;
+    @include flex-direction;
+    gap: 60px;
 
     /* This is needed to prevent the canvas from blocking certain clickables! */
     position: relative;
     transition: opacity .5s ease-out;
-
-    .padding {
-        flex-grow: 1;
-        flex-shrink: 1;
-        flex-basis: auto;
-        transition: all 2s ease-out;
-    }
 }
 </style>

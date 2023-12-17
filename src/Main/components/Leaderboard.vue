@@ -17,14 +17,19 @@
 
 <script>
 export default {
-    props: [ 'scores' ],
+    props: {
+        scores: {
+            type: Array,
+            required: true,
+        },
+    },
 };
 </script>
 
 
 <style lang='scss' scoped>
 @import 'style/palette';
-@import 'style/mixins/flex';
+@import 'style/mixins/flex-center';
 
 table {
     width: 80%;

@@ -83,7 +83,7 @@ export default {
 <style lang='scss'>
 @import 'style/globals';
 @import 'style/palette';
-@import 'style/mixins/flex';
+@import 'style/mixins/flex-center';
 @import 'style/mixins/underline';
 
 // -----------------------------------------------------------------------------
