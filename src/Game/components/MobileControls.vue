@@ -120,13 +120,13 @@ export default {
         },
         colorJoystickOnMove: function (event) {
             if (event.direction == Hammer.DIRECTION_LEFT) {
-                register(ACTION_EVENTS.RED, 'joystick-cyan');
+                register(ACTION_EVENTS.CYAN, 'joystick-cyan');
             } else if (event.direction == Hammer.DIRECTION_RIGHT) {
-                register(ACTION_EVENTS.GREEN, 'joystick-purple');
+                register(ACTION_EVENTS.PURPLE, 'joystick-purple');
             } else if (event.direction == Hammer.DIRECTION_UP) {
-                register(ACTION_EVENTS.CYAN, 'joystick-red');
+                register(ACTION_EVENTS.RED, 'joystick-red');
             } else if (event.direction == Hammer.DIRECTION_DOWN) {
-                register(ACTION_EVENTS.PURPLE, 'joystick-green');
+                register(ACTION_EVENTS.GREEN, 'joystick-green');
             }
         },
         colorJoystickOnEnd: function () {
