@@ -97,10 +97,10 @@ export default {
 <style lang='scss' scoped>
 @import 'style/palette';
 @import 'style/mixins/underline';
-@import 'style/mixins/flex';
+@import 'style/mixins/flex-center';
 
 #score {
-    width: 100%;
+    width: 80%;
     margin: 20px auto 0;
 }
 

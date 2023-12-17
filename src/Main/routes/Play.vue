@@ -14,12 +14,13 @@ export default {
 </script>
 
 <style lang='scss'>
-@import 'style/mixins/flex';
+@import 'style/mixins/flex-center';
+@import 'style/mixins/flex-direction';
 
 #play {
-    width: 100%;
+    width: 50%;
     @include flex-center;
-    flex-direction: column;
+    @include flex-direction
 
     p { text-align: center; }
 }

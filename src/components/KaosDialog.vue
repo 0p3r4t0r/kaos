@@ -44,7 +44,7 @@ export default {
 
 <style lang='scss' scoped>
 @import 'style/palette';
-@import 'style/mixins/flex';
+@import 'style/mixins/flex-center';
 @import 'style/mixins/underline';
 
 // -----------------------------------------------------------------------------

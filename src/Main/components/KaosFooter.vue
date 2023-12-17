@@ -21,12 +21,12 @@
 
 <style lang='scss' scoped>
 @import 'style/palette';
-@import 'style/mixins/flex';
+@import 'style/mixins/flex-center';
 
 footer {
     min-height: 50px;
     height: 50px;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 ul {

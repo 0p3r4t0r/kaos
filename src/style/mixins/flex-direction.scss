@@ -1,0 +1,6 @@
+@mixin flex-direction {
+    @media screen and (orientation:landscape) { 
+      flex-direction: row;
+    }
+    flex-direction: column;
+}
