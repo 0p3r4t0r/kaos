@@ -72,11 +72,12 @@ module.exports = {
             filename: 'index.html',
             template: 'src/index.html'
         }),
-        new WorkboxPlugin.GenerateSW({
-            clientsClaim: true,
-            skipWaiting: true,
-            maximumFileSizeToCacheInBytes: 3000000,
-        }),
+        // Disable unless testing, since it interferes with hot reloading
+        // new WorkboxPlugin.GenerateSW({
+        //     clientsClaim: true,
+        //     skipWaiting: true,
+        //     maximumFileSizeToCacheInBytes: 3000000,
+        // }),
         new CopyWebpackPlugin({
             patterns: [
                 { from: 'assets' }

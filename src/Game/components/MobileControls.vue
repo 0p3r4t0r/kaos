@@ -153,6 +153,13 @@ $control-spacing: 20px;
     bottom: 0;
     z-index: 2;
 
+    // Prevents the controls from blocking clicks on the menu
+    pointer-events: none;
+
+    & > * {
+        pointer-events: auto;
+    }
+
     .rotate {
         width: $SPRITE_SIZE;
         height: $SPRITE_SIZE;
