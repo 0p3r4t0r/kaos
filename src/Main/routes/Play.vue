@@ -1,15 +1,16 @@
 <template>
   <div id="play">
-    <p v-html="$t('howtoplay')" />
+    <KaosHeader :text="$t('howtoplay')" />
     <ModeSelect />
   </div>
 </template>
 
 <script>
+import KaosHeader from '../components/KaosHeader.vue';
 import ModeSelect from '../components/ModeSelect.vue';
 
 export default {
-    components: { ModeSelect },
+    components: { KaosHeader, ModeSelect },
 };
 </script>
 
@@ -20,8 +21,6 @@ export default {
 #play {
     width: 60%;
     @include flex-center;
-    @include flex-direction
-
-    p { text-align: center; }
+    @include flex-direction;
 }
 </style>

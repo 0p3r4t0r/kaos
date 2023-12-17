@@ -23,14 +23,15 @@
 @import 'style/palette';
 @import 'style/mixins/flex-center';
 
-footer {
-    min-height: 50px;
-    height: 50px;
-    margin-top: 30px;
-}
-
 ul {
+    display: flex;
+    gap: 20px;
+
     @include flex-center;
+    @media screen and (orientation:landscape) { 
+      flex-direction: column;
+    }
+    flex-direction: row;
     li { margin: 0 10px; }
 }
 </style>

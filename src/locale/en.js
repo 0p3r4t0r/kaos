@@ -65,7 +65,6 @@ export default {
             We have had a ton of fun with this project and hope that you
             can enjoy it as much as we have.
         </p>
-        <br />
         <p>Best regards,</p>
         <p>the developers</p>
     `,

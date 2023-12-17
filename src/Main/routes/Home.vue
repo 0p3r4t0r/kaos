@@ -1,5 +1,6 @@
 <template>
   <div id="home">
+    <KaosHeader />
     <List
       :items="items"
       :active-index="activeIndex"
@@ -9,11 +10,12 @@
 </template>
 
 <script>
+import KaosHeader from '../components/KaosHeader.vue';
 import KaosFooter from '../components/KaosFooter.vue';
 import List from 'components/List';
 
 export default {
-    components: { KaosFooter, List },
+    components: { KaosHeader, KaosFooter, List },
 
     data() {
         return {
@@ -55,5 +57,6 @@ export default {
 #home {
     @include flex-center;
     @include flex-direction;
+    gap: 40px;
 }
 </style>

@@ -1,5 +1,6 @@
 <template>
   <div id="controls">
+    <KaosHeader />
     <!-- swiper wrapper -->
     <div class="swiper-container">
       <!-- slide wrapper -->
@@ -30,6 +31,7 @@
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
 import { ACTION_EVENTS } from 'input/events';
+import KaosHeader from '../components/KaosHeader.vue';
 
 const INVALID_SWIPER_ACCEPT_CLASSES = [
     'swiper-button-prev',
@@ -38,6 +40,7 @@ const INVALID_SWIPER_ACCEPT_CLASSES = [
 ];
 
 export default {
+    components: { KaosHeader },
 
     data() {
         return {
@@ -82,12 +85,16 @@ export default {
 <style lang='scss' scoped>
 @import 'style/globals';
 @import 'style/palette';
+@import 'style/mixins/flex-center';
+@import 'style/mixins/flex-direction';
 
 // -----------------------------------------------------------------------------
 // CONTROLS
 // -----------------------------------------------------------------------------
 #controls {
     width: 60%;
+    @include flex-center;
+    @include flex-direction;
 }
 
 // -----------------------------------------------------------------------------

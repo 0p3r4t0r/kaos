@@ -1,27 +1,40 @@
 <template>
-  <header>
-    <router-link
-      id="logo"
-      to="/"
-    >
-      <div id="logo-white">
-        <object
-          data="logo/LogoWhite.svg"
-          type="image/svg+xml"
-        />
-      </div>
-      <div id="logo-color">
-        <object
-          data="logo/LogoColor.svg"
-          type="image/svg+xml"
-        />
-      </div>
-    </router-link>
-  </header>
+  <div id="header">
+    <header>
+      <router-link
+        id="logo"
+        to="/"
+      >
+        <div id="logo-white">
+          <object
+            data="logo/LogoWhite.svg"
+            type="image/svg+xml"
+          />
+        </div>
+        <div id="logo-color">
+          <object
+            data="logo/LogoColor.svg"
+            type="image/svg+xml"
+          />
+        </div>
+      </router-link>
+    </header>
+    <p
+      v-if="text"
+      v-html="text"
+    />
+  </div>
 </template>
 
 <script>
 export default {
+    props: {
+        text: {
+            type: String,
+            default: ''
+        }
+    },
+
     mounted() {
         let logo = document.getElementById('logo');
         let logoWhite= document.getElementById('logo-white');
@@ -54,6 +67,22 @@ export default {
 
 <style lang='scss' scoped>
 @import 'style/globals';
+@import 'style/mixins/flex-center';
+
+// -----------------------------------------------------------------------------
+// LOGO
+// -----------------------------------------------------------------------------
+#header {
+  @include flex-center;
+  flex-direction: column;
+  z-index: 2;
+  
+  p { 
+    text-align: center;
+    max-height: 12em;
+    min-width: 20em;
+  }
+}
 
 // -----------------------------------------------------------------------------
 // LOGO
@@ -64,7 +93,7 @@ export default {
     position: relative;
     overflow: hidden;
     outline: 0;
-    z-index: 2;
+    // margin-bottom: -20px;
 
     * {
         width: 100%;

@@ -1,22 +1,25 @@
 <template>
   <div id="scores">
-    <div class="pagination-wrapper">
-      <span
-        v-for="(modeScores, mode) in scores"
-        :key="mode"
-        class="pagination-slide"
-      >
-        {{ $t(`modes.${mode}.label`) }}
-      </span>
-    </div>
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        <div
+    <KaosHeader />
+    <div id="scores-inner">
+      <div class="pagination-wrapper">
+        <span
           v-for="(modeScores, mode) in scores"
           :key="mode"
-          class="swiper-slide"
+          class="pagination-slide"
         >
-          <Leaderboard :scores="modeScores" />
+          {{ $t(`modes.${mode}.label`) }}
+        </span>
+      </div>
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div
+            v-for="(modeScores, mode) in scores"
+            :key="mode"
+            class="swiper-slide"
+          >
+            <Leaderboard :scores="modeScores" />
+          </div>
         </div>
       </div>
     </div>
@@ -29,10 +32,11 @@ import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
 import { SCORES } from 'globals';
 import { ACTION_EVENTS } from 'input/events';
+import KaosHeader from '../components/KaosHeader.vue';
 import Leaderboard from '../components/Leaderboard.vue';
 
 export default {
-    components: { Leaderboard },
+    components: { KaosHeader, Leaderboard },
 
     data() {
         return {
@@ -98,13 +102,27 @@ export default {
 @import 'style/palette';
 @import 'style/mixins/underline';
 @import 'style/mixins/flex-center';
+@import 'style/mixins/flex-direction';
 
 // -----------------------------------------------------------------------------
 // SCORES
 // -----------------------------------------------------------------------------
 
 #scores {
-    width: 60%;
+    @include flex-center;
+    @include flex-direction;
+    @media screen and (orientation:landscape) { 
+        width: 80%;
+        height: 100%;
+    }
+    width: 100%;
+}
+
+#scores-inner {
+    @media screen and (orientation:landscape) { 
+        height: 100%;
+    }
+    width: 100%;
 }
 
 // -----------------------------------------------------------------------------
@@ -113,7 +131,7 @@ export default {
 
 .swiper-container {
     width: 100%;
-    height: 100%;
+    max-height: 200px;
 }
 
 // -----------------------------------------------------------------------------
@@ -132,6 +150,7 @@ export default {
 
 .pagination-wrapper {
     @include flex-center;
+    margin-top: 20px;
 }
 
 .pagination-slide {

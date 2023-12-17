@@ -1,6 +1,5 @@
 <template>
   <div id="main">
-    <KaosHeader />
     <LocalePicker />
     <router-view v-slot="{ Component }">
       <transition
@@ -18,11 +17,10 @@ import { setContext, CONTEXTS } from 'input/state';
 import router from './router.js';
 
 import LocalePicker from './components/LocalePicker.vue';
-import KaosHeader from './components/KaosHeader.vue';
 
 export default {
     router,
-    components: { LocalePicker, KaosHeader },
+    components: { LocalePicker },
 
     mounted() {
         setContext(CONTEXTS.MENU);
@@ -39,7 +37,7 @@ export default {
 
     @include flex-center;
     @include flex-direction;
-    gap: 40px;
+    gap: 60px;
 
     /* This is needed to prevent the canvas from blocking certain clickables! */
     position: relative;
