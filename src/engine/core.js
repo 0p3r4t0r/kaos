@@ -264,6 +264,13 @@ function _resize() {
 // -----------------------------------------------------------------------------
 // HELPERS
 // -----------------------------------------------------------------------------
+export function normalX(x, y) {
+    return x / Math.sqrt(x**2, y**2);
+}
+
+export function normalY(x, y) {
+    return y / Math.sqrt(x**2, y**2);
+}
 
 /*
  * x and y components for 45 degree angle unit velocity vector.
